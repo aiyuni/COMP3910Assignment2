@@ -21,17 +21,14 @@
     <h:outputText value = "Your current timesheet start week is: #{timesheetController.currentTimesheet.startWeek}" /> 
 	<h:form>
 		<p:dataTable value="#{timesheetRowController.timesheetRowList}" var="emp">  <!--  this should be changed to list property for editing -->
-			<p:column headerText="Timesheet Row Id">
-                <h:inputText value="#{emp.timesheetRowId}"/>
-            </p:column>
         	<p:column headerText="Timesheet Id">
-            	<h:inputText value="#{emp.timesheetId}"/>
+            	<h:inputText value="#{emp.compPrimaryKey.timesheetId}"/>
             </p:column>
             <p:column headerText="Project Id">
-            	<h:inputText value="#{emp.projectId}"/>
+            	<h:inputText value="#{emp.compPrimaryKey.projectId}"/>
             </p:column>
             <p:column headerText="Work Package">
-            	<h:inputText value="#{emp.workPackage}"/>
+            	<h:inputText value="#{emp.compPrimaryKey.workPackage}"/>
             </p:column>
             <p:column headerText="Monday">
            		<h:inputText value="#{emp.mon}"/>
@@ -57,13 +54,46 @@
             <p:column headerText="Notes">
            		<h:inputText value="#{emp.notes}"/>
             </p:column>
-            <p:column headerText="Edit This Row">
-                <p:commandButton value = "Edit This Row!" ajax="false" action ="CurrentTimesheetView"></p:commandButton>  
+            <p:column headerText="Delete Row">
+                <p:commandButton value = "Delete Row" ajax="false" action ="#{timesheetRowController.deleteTimesheetRow(emp)}"></p:commandButton>  
             </p:column>
 		</p:dataTable>
 		
 		<!--  why is redirection not working? -->
 		<p:commandButton value = "Save Timesheet" action ="#{timesheetRowController.updateTimesheetRow()}"></p:commandButton>
+	</h:form>
+	
+	<h:form>
+		<p:outputLabel value = "Create New Worksheet" />
+		<h:panelGrid columns = "2" cellpadding = "5">
+			<p:outputLabel value = "Timesheet Id" />
+			<p:inputText value = "#{timesheetRowController.currentTimesheet.timesheetId}"></p:inputText>
+			<p:outputLabel value = "Project Id" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.compPrimaryKey.projectId}"></p:inputText>
+			<p:outputLabel value = "Work Package" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.compPrimaryKey.workPackage}"></p:inputText>
+			<p:outputLabel value = "Monday Hours:" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.mon}"></p:inputText>
+			<p:outputLabel value = "Tuesday Hours:" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.tues}"></p:inputText>
+			<p:outputLabel value = "Wednesday Hours:" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.wed}"></p:inputText>
+			<p:outputLabel value = "Thursday Hours:" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.thurs}"></p:inputText>
+			<p:outputLabel value = "Friday Hours:" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.fri}"></p:inputText>
+			<p:outputLabel value = "Saturday Hours:" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.sat}"></p:inputText>
+			<p:outputLabel value = "Sunday Hours:" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.sun}"></p:inputText>
+			<p:outputLabel value = "Notes:" />
+			<p:inputText value = "#{timesheetRowController.timesheetRow.notes}"></p:inputText>
+		</h:panelGrid>
+	
+		
+		<p:commandButton value = "Add TimesheetRow!" ajax="false" action ="#{timesheetRowController.addTimesheetRow(timesheetRowController.timesheetRow)}"></p:commandButton>  
+		<p:commandButton value = "Go Back to View-Only mode" ajax="false" action ="CurrentTimesheetView"></p:commandButton>  
+		
 	</h:form>
 </h:body> 
 </html>

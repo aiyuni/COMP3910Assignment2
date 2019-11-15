@@ -92,6 +92,10 @@ public class EmployeeController implements Serializable {
 		}
 	}
 	
+	/*Crude logic to make sure it doesn't update if the employee username matches one already existing 
+	 * in database
+	 * Todo: Issue if the user attempts to edit 2 usernames to the same different username
+	 */
 	public void updateEmployee() {
 		List<Employee> tempEmpList = service.getAllEmployees();
 		boolean isUnique = true;

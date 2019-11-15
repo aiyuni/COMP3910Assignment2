@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import Models.TimesheetRow;
+import Models.TimesheetRowKey;
 
 @Stateless
 public class TimesheetRowService {
@@ -27,18 +28,18 @@ public class TimesheetRowService {
 
 	}
 	
-    public TimesheetRow find(int id) {
-        return em.find(TimesheetRow.class, id);
+    public TimesheetRow find(TimesheetRowKey key) {
+        return em.find(TimesheetRow.class, key);
     }
     
     public void merge(TimesheetRow timesheetRow) {
     	em.merge(timesheetRow);
     }
     
-    public void removeTimesheetRow(TimesheetRow thisEmployee) {
+    public void removeTimesheetRow(TimesheetRow thisRow) {
         //attach product
-       thisEmployee = find(thisEmployee.getTimesheetId());
-        em.remove(thisEmployee);
+       thisRow = find(thisRow.getCompPrimaryKey());
+        em.remove(thisRow);
     }
     
     /**

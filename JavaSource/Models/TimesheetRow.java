@@ -3,6 +3,7 @@ package Models;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,19 +16,22 @@ public class TimesheetRow implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
+  /*  @Id
     @Column(name = "timesheetrowid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int timesheetRowId;
+    private int timesheetRowId; */
+    
+    @EmbeddedId
+    private TimesheetRowKey compPrimaryKey;
 
-    @Column(name = "timesheetid")
+	/*@Column(name = "timesheetid")
     private int timesheetId;
 
     @Column(name = "projectid")
     private int projectId;
 
     @Column(name = "workpackage")
-    private String workPackage = "";
+    private String workPackage = ""; */
 
     @Column(name = "monday")
     private Integer mon = 0;
@@ -61,15 +65,28 @@ public class TimesheetRow implements Serializable {
     }
 
     
-    public int getTimesheetRowId() {
+  /*  public int getTimesheetRowId() {
         return timesheetRowId;
     }
 
     public void setTimesheetRowId(int timesheetRowId) {
         this.timesheetRowId = timesheetRowId;
+    } */
+    
+    public double getTotalHours() {
+    	return mon + tues + wed + thurs + fri + sat + sun;
     }
+    
+    public TimesheetRowKey getCompPrimaryKey() {
+		return compPrimaryKey;
+	}
 
-    public int getTimesheetId() {
+
+	public void setCompPrimaryKey(TimesheetRowKey compPrimaryKey) {
+		this.compPrimaryKey = compPrimaryKey;
+	}
+
+   /* public int getTimesheetId() {
         return timesheetId;
     }
 
@@ -91,7 +108,7 @@ public class TimesheetRow implements Serializable {
 
     public void setWorkPackage(String workPackage) {
         this.workPackage = workPackage;
-    }
+    }  */
 
     public Integer getMon() {
         return mon;

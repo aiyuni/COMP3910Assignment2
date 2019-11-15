@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import Models.Timesheet;
 import Models.TimesheetRow;
+import Models.TimesheetRowKey;
 import Services.TimesheetRowService;
 
 @Named
@@ -24,15 +25,7 @@ public class TimesheetRowController implements Serializable{
 	private List<TimesheetRow> timesheetRowList = new ArrayList<>();
 	
 	private Timesheet currentTimesheet;
-	
-	public TimesheetRow getTimesheetRow() {
-		return timesheetRow;
-	}
-	
-	public void setTimesheetRow(TimesheetRow timesheetRow) {
-		this.timesheetRow = timesheetRow;
-	}
-	
+
 	//We use this method.
 	public List<TimesheetRow> getAllTimesheetRows(Timesheet timesheet){
 		currentTimesheet = timesheet;
@@ -52,6 +45,105 @@ public class TimesheetRowController implements Serializable{
 		return service.getAllTimesheetRows(timesheetId);
 	}
 	
+	/**
+	 * Populates the timesheetRowList (called if the list is null)
+	 */
+	private void refreshList() {
+		for (int i = 0; i < service.getAllTimesheetRows(currentTimesheet.getTimesheetId()).size(); i++) {
+			timesheetRowList.add(service.getAllTimesheetRows(currentTimesheet.getTimesheetId()).get(i));
+		}
+	}
+
+	public void addTimesheetRow(TimesheetRow tsRow) {
+		service.addTimesheetRow(tsRow);
+	}
+	
+	/**
+	 * Update method
+	 */
+	public String updateTimesheetRow() {
+		for (TimesheetRow ts : timesheetRowList) {
+			service.merge(ts);
+		}
+		return "CurrentTimesheetView";
+	}
+	
+	/**
+	 * Delete method
+	 * @param thisRow
+	 * @return
+	 */
+	public String deleteTimesheetRow(TimesheetRow thisRow) {
+		service.removeTimesheetRow(thisRow);
+		timesheetRowList.remove(thisRow);
+		return "";
+	}
+	
+	public double getTotalHoursWorkedOnTimesheetRow(double mon, double tues, double wed, double thurs, double fri, 
+			double sat, double sun) {
+		return mon + tues + wed + thurs + fri + sat + sun;
+	}
+	
+	public double getTotalHoursWorkedOnTimesheet() {
+		double overallTotal = 0;
+		for (TimesheetRow ts : timesheetRowList) {
+			overallTotal += ts.getTotalHours();
+		}
+		return overallTotal;
+	}
+	
+	public double getTotalHoursOnDay(int dayOfWeek) {
+		double total = 0;
+		for (TimesheetRow ts : timesheetRowList) {
+			switch (dayOfWeek) {
+				case 1: 
+					total += ts.getMon();
+					break;
+				case 2:
+					total += ts.getTues();
+					break;
+				case 3:
+					total += ts.getWed();
+					break;
+				case 4:
+					total += ts.getThurs();
+					break;
+				case 5:
+					total += ts.getFri();
+					break;
+				case 6:
+					total += ts.getSat();
+					break;
+				case 7: 
+					total += ts.getSun();
+					break;
+				default: 
+					System.out.println("Something went wrong... dayOfWeek invalid");
+			}
+		}
+		return total;
+	}
+	
+	
+	//Getters and Setters
+	public TimesheetRow getTimesheetRow() {
+		if (timesheetRow == null) {
+			timesheetRow = new TimesheetRow();
+			timesheetRow.setCompPrimaryKey(new TimesheetRowKey());
+		}
+	/*	if (timesheetRow.getTimesheetId() == 0) {
+			timesheetRow.setTimesheetId(currentTimesheet.getTimesheetId());
+		} */
+		if (timesheetRow.getCompPrimaryKey().getTimesheetId() == 0) {
+			timesheetRow.getCompPrimaryKey().setTimesheetId(currentTimesheet.getTimesheetId());
+		} 
+		return timesheetRow;
+	}
+	
+	public void setTimesheetRow(TimesheetRow timesheetRow) {
+		this.timesheetRow = timesheetRow;
+	}
+	
 	public List<TimesheetRow> getTimesheetRowList(){
 		if (timesheetRowList == null) {
 			refreshList();
@@ -63,18 +155,12 @@ public class TimesheetRowController implements Serializable{
 		this.timesheetRowList = timesheetrowlist;
 	}
 	
-	private void refreshList() {
-		for (int i = 0; i < service.getAllTimesheetRows(currentTimesheet.getTimesheetId()).size(); i++) {
-			timesheetRowList.add(service.getAllTimesheetRows(currentTimesheet.getTimesheetId()).get(i));
-		}
+	public Timesheet getCurrentTimesheet() {
+		return currentTimesheet;
 	}
 
-	/**
-	 * Update method
-	 */
-	public void updateTimesheetRow() {
-		for (TimesheetRow ts : timesheetRowList) {
-			service.merge(ts);
-		}
+	public void setCurrentTimesheet(Timesheet currentTimesheet) {
+		this.currentTimesheet = currentTimesheet;
 	}
+	
 }

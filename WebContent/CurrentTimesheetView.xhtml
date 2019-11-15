@@ -8,60 +8,77 @@
 	
 <h:head></h:head> 
 <h:body> 
-	<h:outputText value = "You are in TimesheetRow View Page!" /> 
+	<h:outputLabel value = "You are in TimesheetRow View Page!" /> 
 	<br />
- 	<h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
+ 	<h:outputLabel value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
     <br />
-    <h:outputText value = "Your password is #{employeeController.currentEmployee.password}" /> 
+    <h:outputLabel value = "Your password is #{employeeController.currentEmployee.password}" /> 
     <br/>
-    <h:outputText value = "Your current timesheet is:  #{timesheetController.currentTimesheet.timesheetId}" /> 
+    <h:outputLabel value = "Your current timesheet is:  #{timesheetController.currentTimesheet.timesheetId}" /> 
     <br />
-    <h:outputText value = "Your current timesheet start week is: #{timesheetController.currentTimesheet.startWeek}" /> 
+    <h:outputLabel value = "Your current timesheet start week is: #{timesheetController.currentTimesheet.startWeek}" /> 
 	<h:form>
 		<p:dataTable value="#{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet)}" var="emp">  <!--  this should be changed to list property for editing -->
-			<p:column headerText="Timesheet Row Id">
-                <h:outputText value="#{emp.timesheetRowId}"/>
-            </p:column>
         	<p:column headerText="Timesheet Id">
-            	<h:outputText value="#{emp.timesheetId}"/>
+            	<h:outputLabel value="#{emp.compPrimaryKey.timesheetId}"/>
             </p:column>
             <p:column headerText="Project Id">
-            	<h:outputText value="#{emp.projectId}"/>
+            	<h:outputLabel value="#{emp.compPrimaryKey.projectId}"/>
             </p:column>
             <p:column headerText="Work Package">
-            	<h:outputText value="#{emp.workPackage}"/>
+            	<h:outputLabel value="#{emp.compPrimaryKey.workPackage}"/>
             </p:column>
             <p:column headerText="Monday">
-           		<h:outputText value="#{emp.mon}"/>
+           		<h:outputLabel value="#{emp.mon}"/>
             </p:column>
             <p:column headerText="Tuesday">
-           		<h:outputText value="#{emp.tues}"/>
+           		<h:outputLabel value="#{emp.tues}"/>
             </p:column>
             <p:column headerText="Wednesday">
-           		<h:outputText value="#{emp.wed}"/>
+           		<h:outputLabel value="#{emp.wed}"/>
             </p:column>
             <p:column headerText="Thursday">
-           		<h:outputText value="#{emp.thurs}"/>
+           		<h:outputLabel value="#{emp.thurs}"/>
             </p:column>
             <p:column headerText="Friday">
-           		<h:outputText value="#{emp.fri}"/>
+           		<h:outputLabel value="#{emp.fri}"/>
             </p:column>
             <p:column headerText="Saturday">
-           		<h:outputText value="#{emp.sat}"/>
+           		<h:outputLabel value="#{emp.sat}"/>
             </p:column>
             <p:column headerText="Sunday">
-           		<h:outputText value="#{emp.sun}"/>
+           		<h:outputLabel value="#{emp.sun}"/>
+            </p:column>
+            <p:column headerText="Totals">
+           		<h:outputLabel value="#{timesheetRowController.getTotalHoursWorkedOnTimesheetRow(emp.mon, emp.tues, emp.wed, emp.thurs, emp.fri, emp.sat, emp.sun)}"/>
             </p:column>
             <p:column headerText="Notes">
-           		<h:outputText value="#{emp.notes}"/>
-            </p:column>
-            <p:column headerText="Edit This Row">
-                <p:commandButton value = "Edit This Row!" ajax="false" action ="CurrentTimesheetView"></p:commandButton>  
+           		<h:outputLabel value="#{emp.notes}"/>
             </p:column>
 		</p:dataTable>
 		
+		<h:panelGrid columns="2" cellpadding="3">
+			<p:outputLabel value="Total Hours On Monday:" />
+			<p:outputLabel value="#{timesheetRowController.getTotalHoursOnDay(1)}"></p:outputLabel>
+			<p:outputLabel value="Total Hours On Tuesday:" />
+			<p:outputLabel value="#{timesheetRowController.getTotalHoursOnDay(2)}"></p:outputLabel>
+			<p:outputLabel value="Total Hours On Wednesday:" />
+			<p:outputLabel value="#{timesheetRowController.getTotalHoursOnDay(3)}"></p:outputLabel>
+			<p:outputLabel value="Total Hours On Thursday:" />
+			<p:outputLabel value="#{timesheetRowController.getTotalHoursOnDay(4)}"></p:outputLabel>
+			<p:outputLabel value="Total Hours On Friday:" />
+			<p:outputLabel value="#{timesheetRowController.getTotalHoursOnDay(5)}"></p:outputLabel>
+			<p:outputLabel value="Total Hours On Saturday:" />
+			<p:outputLabel value="#{timesheetRowController.getTotalHoursOnDay(6)}"></p:outputLabel>
+			<p:outputLabel value="Total Hours On Sunday:" />
+			<p:outputLabel value="#{timesheetRowController.getTotalHoursOnDay(7)}"></p:outputLabel>
+			<p:outputLabel value="Total Hours For Entire Timesheet:" />
+			<p:outputLabel value="#{timesheetRowController.getTotalHoursWorkedOnTimesheet()}"></p:outputLabel>
+		</h:panelGrid>
+		<h:outputLabel value="Total hours worked is: #{timesheetRowController.getTotalHoursWorkedOnTimesheet()}"/>
+		<br/>
 		<!--  why is redirection not working? -->
-		<p:commandButton value = "Edit Timesheet" action ="CurrentTimesheetEdit"></p:commandButton>
+		<p:commandButton value = "Edit/Add to Timesheet" action ="CurrentTimesheetEdit"></p:commandButton>
 	</h:form>
 </h:body> 
 </html>
