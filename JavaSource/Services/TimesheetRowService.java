@@ -16,13 +16,13 @@ public class TimesheetRowService {
 	@PersistenceContext(name = "TimesheetApp")
 	private EntityManager em;
 
-	public void addTimesheetRow(TimesheetRow emp) {
-		if(em.contains(emp)) {
-			System.out.println("merging inside addEmployee");
-			em.merge(emp);
+	public void addTimesheetRow(TimesheetRow timesheetRow) {
+		if(em.contains(timesheetRow)) {
+			System.out.println("merging inside addTimesheetRow");
+			em.merge(timesheetRow);
 		}
 		else {
-			em.persist(emp);
+			em.persist(timesheetRow);
 		}
 
 	}
@@ -31,8 +31,8 @@ public class TimesheetRowService {
         return em.find(TimesheetRow.class, id);
     }
     
-    public void merge(TimesheetRow employee) {
-    	em.merge(employee);
+    public void merge(TimesheetRow timesheetRow) {
+    	em.merge(timesheetRow);
     }
     
     public void removeTimesheetRow(TimesheetRow thisEmployee) {
@@ -42,30 +42,30 @@ public class TimesheetRowService {
     }
     
     /**
-     * Gets a list of all the employees in the Employee table belong to the user
+     * Gets a list of all the timesheetRows belong to the timesheetId
      * @return
      */
-    public List<TimesheetRow> getAllTimesheetRows(int employeeId){
+    public List<TimesheetRow> getAllTimesheetRows(int timesheetId){
     	
     	TypedQuery<TimesheetRow> query = em.createQuery(
 	                 "select ps from TimesheetRow ps " +
-	                 "order by ps.TimesheetRowId",
+	                 "where timesheetId=:timesheetId",
 		                 TimesheetRow.class); 
-    	query.setParameter("employeeId", employeeId);  //set query parameter for employeeId
+    	query.setParameter("timesheetId", timesheetId);  //set query parameter for timesheetID
 	   
-		java.util.List<TimesheetRow> employeeList = query.getResultList();
+		java.util.List<TimesheetRow> timesheetRowList = query.getResultList();
 		
-		TimesheetRow[] psarray = new TimesheetRow[employeeList.size()];
+		TimesheetRow[] psarray = new TimesheetRow[timesheetRowList.size()];
 		for (int i=0; i < psarray.length; i++) {
-			psarray[i] = employeeList.get(i);
+			psarray[i] = timesheetRowList.get(i);
 		}
 		
-		ArrayList<TimesheetRow> returningEmployeeList = new ArrayList<TimesheetRow>();
-		for (int i = 0; i < employeeList.size(); i++) {
-			returningEmployeeList.add(employeeList.get(i));
+		ArrayList<TimesheetRow> returningTimesheetRowList = new ArrayList<TimesheetRow>();
+		for (int i = 0; i < timesheetRowList.size(); i++) {
+			returningTimesheetRowList.add(timesheetRowList.get(i));
 		}
 		//return Arrays.asList(psarray);
-		return returningEmployeeList;
+		return returningTimesheetRowList;
     
     }
     
@@ -75,19 +75,19 @@ public class TimesheetRowService {
 	                 "select ps from TimesheetRow ps",
 		                 TimesheetRow.class); 
 	   
-		java.util.List<TimesheetRow> employeeList = query.getResultList();
+		java.util.List<TimesheetRow> timesheetRowList = query.getResultList();
 		
-		TimesheetRow[] psarray = new TimesheetRow[employeeList.size()];
+		TimesheetRow[] psarray = new TimesheetRow[timesheetRowList.size()];
 		for (int i=0; i < psarray.length; i++) {
-			psarray[i] = employeeList.get(i);
+			psarray[i] = timesheetRowList.get(i);
 		}
 		
-		ArrayList<TimesheetRow> returningEmployeeList = new ArrayList<TimesheetRow>();
-		for (int i = 0; i < employeeList.size(); i++) {
-			returningEmployeeList.add(employeeList.get(i));
+		ArrayList<TimesheetRow> returningTimesheetRowList = new ArrayList<TimesheetRow>();
+		for (int i = 0; i < timesheetRowList.size(); i++) {
+			returningTimesheetRowList.add(timesheetRowList.get(i));
 		}
 		//return Arrays.asList(psarray);
-		return returningEmployeeList;
+		return returningTimesheetRowList;
     
     }
 }

@@ -1,6 +1,7 @@
 package Services;
 
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -18,13 +19,13 @@ public class TimesheetService {
 	@PersistenceContext(name = "TimesheetApp")
 	private EntityManager em;
 
-	public void addTimesheet(Timesheet emp) {
-		if(em.contains(emp)) {
-			System.out.println("merging inside addEmployee");
-			em.merge(emp);
+	public void addTimesheet(Timesheet ts) {
+		if(em.contains(ts)) {
+			System.out.println("merging inside addTimesheet");
+			em.merge(ts);
 		}
 		else {
-			em.persist(emp);
+			em.persist(ts);
 		}
 
 	}
@@ -33,14 +34,14 @@ public class TimesheetService {
         return em.find(Timesheet.class, id);
     }
     
-    public void merge(Timesheet employee) {
-    	em.merge(employee);
+    public void merge(Timesheet ts) {
+    	em.merge(ts);
     }
     
-    public void removeEmployee(Timesheet thisEmployee) {
+    public void removeEmployee(Timesheet thisTimesheet) {
         //attach product
-       thisEmployee = find(thisEmployee.getEmployeeId());
-        em.remove(thisEmployee);
+       thisTimesheet = find(thisTimesheet.getEmployeeId());
+        em.remove(thisTimesheet);
     }
     
     /**
@@ -55,20 +56,50 @@ public class TimesheetService {
 		                 Timesheet.class); 
     	query.setParameter("employeeId", employeeId);  //set query parameter for employeeId
 	   
-		java.util.List<Timesheet> employeeList = query.getResultList();
+		java.util.List<Timesheet> timesheetList = query.getResultList();
 		
-		Timesheet[] psarray = new Timesheet[employeeList.size()];
+		Timesheet[] psarray = new Timesheet[timesheetList.size()];
 		for (int i=0; i < psarray.length; i++) {
-			psarray[i] = employeeList.get(i);
+			psarray[i] = timesheetList.get(i);
 		}
 		
-		ArrayList<Timesheet> returningEmployeeList = new ArrayList<Timesheet>();
-		for (int i = 0; i < employeeList.size(); i++) {
-			returningEmployeeList.add(employeeList.get(i));
+		ArrayList<Timesheet> returningTimesheetList = new ArrayList<Timesheet>();
+		for (int i = 0; i < timesheetList.size(); i++) {
+			returningTimesheetList.add(timesheetList.get(i));
 		}
 		//return Arrays.asList(psarray);
-		return returningEmployeeList;
+		return returningTimesheetList;
     
+    }
+    
+    /**
+     * Gets the current Timesheet represented by the employee Id, startWeek, and endWeek. 
+     * Try to use timesheetId as the only paramater?
+     * @param employeeId
+     * @param startWeek
+     * @param endWeek
+     * @return
+     */
+    public Timesheet getCurrentTimesheet(int employeeId, Date startWeek, Date endWeek) {
+    	 Query query = em.createNativeQuery(
+                 "select * from Timesheet where employeeId=:employeeId"
+                 + " and startWeek=:startWeek limit 1", Timesheet.class);
+         query.setParameter("employeeId", employeeId);
+         query.setParameter("startWeek", startWeek);
+         Timesheet timesheet = null;
+         try {
+             timesheet = (Timesheet) query.getSingleResult();
+         } catch (NoResultException e) {
+        	 System.out.println("Timesheet query is null!");
+         }
+         if (timesheet == null) {
+        	 System.out.println("Timesheet query is null!");
+             timesheet = new Timesheet();
+             timesheet.setEmployeeId(employeeId);
+             timesheet.setStartWeek(startWeek);
+             timesheet.setEndWeek(endWeek);
+         }
+         return timesheet;
     }
     
     /*

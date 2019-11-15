@@ -41,6 +41,8 @@ public class TimesheetController implements Serializable {
     private Timesheet timesheet;
     private List<Timesheet> timesheetList = new ArrayList<Timesheet>();
     private int weekNumber;
+    
+    Timesheet currentTimesheet;
 
     //private List<Timesheet> history;
     
@@ -69,5 +71,19 @@ public class TimesheetController implements Serializable {
     		timesheetList.add(service.getAllTimesheets(currentEmployee.getEmployeeId()).get(i));
     	}
     }
+
+	public Timesheet getCurrentTimesheet() {
+		return currentTimesheet;
+	}
+
+	public void setCurrentTimesheet(Timesheet currentTimesheet) {
+		this.currentTimesheet = currentTimesheet;
+	}
+	
+	public String goToTimesheet(int employeeId, Date startWeek, Date endWeek) {
+		this.currentTimesheet = service.getCurrentTimesheet(employeeId, startWeek, endWeek);
+		//this.currentTimesheet = timesheet;
+		return "CurrentTimesheetView";
+	}
     
 }

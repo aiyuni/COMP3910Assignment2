@@ -13,8 +13,12 @@
  	<h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
     <br />
     <h:outputText value = "Your password is #{employeeController.currentEmployee.password}" /> 
+    <br/>
+    <h:outputText value = "Your current timesheet is:  #{timesheetController.currentTimesheet.timesheetId}" /> 
+    <br />
+    <h:outputText value = "Your current timesheet start week is: #{timesheetController.currentTimesheet.startWeek}" /> 
 	<h:form>
-		<p:dataTable value="#{timesheetRowController.getAllTimesheetRows()}" var="emp">  <!--  this should be changed to list property for editing -->
+		<p:dataTable value="#{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet.timesheetId)}" var="emp">  <!--  this should be changed to list property for editing -->
 			<p:column headerText="Timesheet Row Id">
                 <h:outputText value="#{emp.timesheetRowId}"/>
             </p:column>

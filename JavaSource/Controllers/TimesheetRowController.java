@@ -37,8 +37,14 @@ public class TimesheetRowController implements Serializable{
 		return service.getAllTimesheetRows(currentTimesheet.getTimesheetId());
 	}
 	
+	//Gets all the timesheetrows in database
 	public List<TimesheetRow> getAllTimesheetRows(){
 		return service.getAllTimesheetRows();
+	}
+	
+	//overloaded method to get timesheetrows for the specific timesheetId
+	public List<TimesheetRow> getAllTimesheetRows(int timesheetId){
+		return service.getAllTimesheetRows(timesheetId);
 	}
 	
 	public List<TimesheetRow> getTimesheetRowList(){

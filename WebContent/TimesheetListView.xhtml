@@ -28,7 +28,7 @@
            		<h:outputText value="#{emp.endWeek}"/>
             </p:column>
             <p:column headerText="Go To This Timesheet">
-                <p:commandButton value = "Go To This Timesheet!" ajax="false" action ="CurrentTimesheetView"></p:commandButton>  
+                <p:commandButton value = "Go To This Timesheet!" ajax="false" action ="#{timesheetController.goToTimesheet(emp.employeeId, emp.startWeek, emp.endWeek)}"></p:commandButton>  
             </p:column>
 		</p:dataTable>
 		
