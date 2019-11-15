@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	
+<h:head></h:head> 
+<h:body> 
+	<h:outputText value = "You are in TimesheetRow View Page!" /> 
+	<br />
+ 	<h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
+    <br />
+    <h:outputText value = "Your password is #{employeeController.currentEmployee.password}" /> 
+	<h:form>
+		<p:dataTable value="#{timesheetRowController.getAllTimesheetRows()}" var="emp">  <!--  this should be changed to list property for editing -->
+			<p:column headerText="Timesheet Row Id">
+                <h:outputText value="#{emp.timesheetRowId}"/>
+            </p:column>
+        	<p:column headerText="Timesheet Id">
+            	<h:outputText value="#{emp.timesheetId}"/>
+            </p:column>
+            <p:column headerText="Work Package">
+            	<h:outputText value="#{emp.workPackage}"/>
+            </p:column>
+            <p:column headerText="Notes">
+           		<h:outputText value="#{emp.notes}"/>
+            </p:column>
+            <p:column headerText="Go To This Timesheet">
+                <p:commandButton value = "Go To This Timesheet!" ajax="false" action ="CurrentTimesheetView"></p:commandButton>  
+            </p:column>
+		</p:dataTable>
+		
+		<!--  why is redirection not working? -->
+		<p:commandButton value = "Go To Employee Page View Mode" action ="EmployeePageView"></p:commandButton>
+	</h:form>
+</h:body> 
+</html>

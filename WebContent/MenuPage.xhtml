@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+
+	<p>Main Menu Page</p>
+	<h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
+    <br />
+    <h:outputText value = "Your password is #{employeeController.currentEmployee.password}" /> 
+    
+    <h:form>
+    	<p:commandButton value = "View All Your Timesheets" ajax="false" action ="TimesheetListView"></p:commandButton> 
+		<p:commandButton value = "View/Edit Current Timesheet" ajax="false" action ="EmployeePageView"></p:commandButton> 
+		<p:commandButton value = "View Previous Timesheets" ajax="false" action ="EmployeePageView"></p:commandButton>
+		<p:commandButton value = "Manage Employees" ajax="false" action ="#{employeeController.goToEmployeeManagementPage}"></p:commandButton> 
+	</h:form>
+	 
+</h:body>
+</html>

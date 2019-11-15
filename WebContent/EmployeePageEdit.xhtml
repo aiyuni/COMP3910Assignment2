@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<p>THIS IS EDIT EMPLOYEE PAGE</p>
+	
+	<h:form>
+		<p:outputLabel value = "List Of Current Employees" />
+		<p:dataTable value="#{employeeController.employeeList}" var="emp">
+			<p:column headerText="Employee Name">
+                <h:inputText value="#{emp.name}"/>
+            </p:column>
+        	<p:column headerText="Username">
+            	<h:inputText value="#{emp.userName}"/>
+            </p:column>
+            <p:column headerText="Password">
+            	<h:inputText value="#{emp.password}"/>
+            </p:column>
+            <p:column headerText="Delete Employee">
+                <p:commandButton value = "Delete This Employee!" ajax="false" action ="#{employeeController.removeEmployee(emp)}"></p:commandButton>  
+            </p:column>
+		</p:dataTable>
+		
+		<!--  why is redirection not working? -->
+		<p:commandButton value = "Update Employee!" action ="#{employeeController.updateEmployee()}"></p:commandButton>  
+
+	</h:form>
+	
+	<h:form>
+		<p:outputLabel value = "Create New Employee" />
+		<h:panelGrid columns = "2" cellpadding = "5">
+			<p:outputLabel value = "Employee Name" />
+			<p:inputText value = "#{employeeController.employee.name}"></p:inputText>
+			<p:outputLabel value = "Employee UserName" />
+			<p:inputText value = "#{employeeController.employee.userName}"></p:inputText>
+			<p:outputLabel value = "Employee Password" />
+			<p:inputText value = "#{employeeController.employee.password}"></p:inputText>
+			<p:outputLabel value = "Employee Admin Status" />
+			<p:inputText value = "#{employeeController.employee.admin}"></p:inputText>
+		</h:panelGrid>
+	
+		
+		<p:commandButton value = "Add Employee!" ajax="false" action ="#{employeeController.addEmployee(employeeController.employee)}"></p:commandButton>  
+		<p:commandButton value = "Go Back to View-Only mode" ajax="false" action ="EmployeePageView"></p:commandButton>  
+		
+	</h:form>
+	
+</h:body>
+</html>
