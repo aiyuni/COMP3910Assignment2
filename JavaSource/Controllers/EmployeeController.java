@@ -21,7 +21,7 @@ import Services.EmployeeService;
 public class EmployeeController implements Serializable {
  
 	private Employee employee = new Employee();
-	List<Employee> employeeList = new ArrayList<Employee>();
+	private List<Employee> employeeList = new ArrayList<Employee>();
 	Employee currentEmployee;
  
 	@EJB
@@ -93,8 +93,20 @@ public class EmployeeController implements Serializable {
 	}
 	
 	public void updateEmployee() {
+		List<Employee> tempEmpList = service.getAllEmployees();
+		boolean isUnique = true;
 		for(Employee e : employeeList) {
-			service.merge(e);
+			for (int i = 0; i < tempEmpList.size(); i++) {
+				if (e.getUserName().equals(tempEmpList.get(i).getUserName())){
+					System.out.println("Equal");
+					isUnique = false;
+					continue;
+				}
+			}
+			if (isUnique) {
+				service.merge(e);
+			}
+			isUnique = true;
 		}
 	}
 	

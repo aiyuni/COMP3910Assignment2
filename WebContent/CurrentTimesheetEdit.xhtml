@@ -6,9 +6,11 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 	
-<h:head></h:head> 
+<h:head>
+
+</h:head> 
 <h:body> 
-	<h:outputText value = "You are in TimesheetRow View Page!" /> 
+	<h:outputText value = "You are in TimesheetRow EDIT Page!" /> 
 	<br />
  	<h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
     <br />
@@ -18,42 +20,42 @@
     <br />
     <h:outputText value = "Your current timesheet start week is: #{timesheetController.currentTimesheet.startWeek}" /> 
 	<h:form>
-		<p:dataTable value="#{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet)}" var="emp">  <!--  this should be changed to list property for editing -->
+		<p:dataTable value="#{timesheetRowController.timesheetRowList}" var="emp">  <!--  this should be changed to list property for editing -->
 			<p:column headerText="Timesheet Row Id">
-                <h:outputText value="#{emp.timesheetRowId}"/>
+                <h:inputText value="#{emp.timesheetRowId}"/>
             </p:column>
         	<p:column headerText="Timesheet Id">
-            	<h:outputText value="#{emp.timesheetId}"/>
+            	<h:inputText value="#{emp.timesheetId}"/>
             </p:column>
             <p:column headerText="Project Id">
-            	<h:outputText value="#{emp.projectId}"/>
+            	<h:inputText value="#{emp.projectId}"/>
             </p:column>
             <p:column headerText="Work Package">
-            	<h:outputText value="#{emp.workPackage}"/>
+            	<h:inputText value="#{emp.workPackage}"/>
             </p:column>
             <p:column headerText="Monday">
-           		<h:outputText value="#{emp.mon}"/>
+           		<h:inputText value="#{emp.mon}"/>
             </p:column>
             <p:column headerText="Tuesday">
-           		<h:outputText value="#{emp.tues}"/>
+           		<h:inputText value="#{emp.tues}"/>
             </p:column>
             <p:column headerText="Wednesday">
-           		<h:outputText value="#{emp.wed}"/>
+           		<h:inputText value="#{emp.wed}"/>
             </p:column>
             <p:column headerText="Thursday">
-           		<h:outputText value="#{emp.thurs}"/>
+           		<h:inputText value="#{emp.thurs}"/>
             </p:column>
             <p:column headerText="Friday">
-           		<h:outputText value="#{emp.fri}"/>
+           		<h:inputText value="#{emp.fri}"/>
             </p:column>
             <p:column headerText="Saturday">
-           		<h:outputText value="#{emp.sat}"/>
+           		<h:inputText value="#{emp.sat}"/>
             </p:column>
             <p:column headerText="Sunday">
            		<h:outputText value="#{emp.sun}"/>
             </p:column>
             <p:column headerText="Notes">
-           		<h:outputText value="#{emp.notes}"/>
+           		<h:inputText value="#{emp.notes}"/>
             </p:column>
             <p:column headerText="Edit This Row">
                 <p:commandButton value = "Edit This Row!" ajax="false" action ="CurrentTimesheetView"></p:commandButton>  
@@ -61,7 +63,7 @@
 		</p:dataTable>
 		
 		<!--  why is redirection not working? -->
-		<p:commandButton value = "Edit Timesheet" action ="CurrentTimesheetEdit"></p:commandButton>
+		<p:commandButton value = "Save Timesheet" action ="#{timesheetRowController.updateTimesheetRow()}"></p:commandButton>
 	</h:form>
 </h:body> 
 </html>

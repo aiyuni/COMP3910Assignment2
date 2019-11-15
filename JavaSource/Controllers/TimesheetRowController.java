@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
@@ -32,8 +33,10 @@ public class TimesheetRowController implements Serializable{
 		this.timesheetRow = timesheetRow;
 	}
 	
+	//We use this method.
 	public List<TimesheetRow> getAllTimesheetRows(Timesheet timesheet){
 		currentTimesheet = timesheet;
+		timesheetRowList = service.getAllTimesheetRows(currentTimesheet.getTimesheetId());
 		return service.getAllTimesheetRows(currentTimesheet.getTimesheetId());
 	}
 	
@@ -42,7 +45,9 @@ public class TimesheetRowController implements Serializable{
 		return service.getAllTimesheetRows();
 	}
 	
-	//overloaded method to get timesheetrows for the specific timesheetId
+	/*overloaded method to get timesheetrows for the specific timesheetId. We cannot use this since we need to 
+	 * dependency inject a timesheet object!
+	 */
 	public List<TimesheetRow> getAllTimesheetRows(int timesheetId){
 		return service.getAllTimesheetRows(timesheetId);
 	}
@@ -61,6 +66,15 @@ public class TimesheetRowController implements Serializable{
 	private void refreshList() {
 		for (int i = 0; i < service.getAllTimesheetRows(currentTimesheet.getTimesheetId()).size(); i++) {
 			timesheetRowList.add(service.getAllTimesheetRows(currentTimesheet.getTimesheetId()).get(i));
+		}
+	}
+
+	/**
+	 * Update method
+	 */
+	public void updateTimesheetRow() {
+		for (TimesheetRow ts : timesheetRowList) {
+			service.merge(ts);
 		}
 	}
 }
