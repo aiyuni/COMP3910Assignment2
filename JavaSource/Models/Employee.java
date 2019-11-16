@@ -16,14 +16,13 @@ public class Employee implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
     @Column(name = "employeeid")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int employeeId;
 
     @Column(name = "name")
     private String name;
 
+    @Id
     @Column(name = "username")
     private String userName;
 

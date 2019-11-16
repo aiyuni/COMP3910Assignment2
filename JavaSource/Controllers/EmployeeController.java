@@ -36,6 +36,7 @@ public class EmployeeController implements Serializable {
 	}
  
 	public void addEmployee(Employee emp) {
+		FacesContext context = FacesContext.getCurrentInstance();
 		/*Need to create a new employee object with the fields equal to the passed in Employee object apart from
 		the auto generated employee id.
 		This is to avoid 'detached entity passed to persist' error.  */
@@ -46,6 +47,7 @@ public class EmployeeController implements Serializable {
 		for(Employee e : currentEmployees) {
 			if(e.getUserName().equals(emp.getUserName())){
 				System.out.println("Cannot add duplicate username.");
+				context.addMessage(null, new FacesMessage("Error: Cannot add a duplicate userName."));
 				return;
 			}
 		}
@@ -53,6 +55,7 @@ public class EmployeeController implements Serializable {
 		newEmployee.setUserName(emp.getUserName());
 		newEmployee.setPassword(emp.getPassword());
 		newEmployee.setAdmin(emp.getAdmin());
+		newEmployee.setEmployeeId(emp.getEmployeeId());
 		service.addEmployee(newEmployee);
 		employeeList.add(newEmployee);
 	}
@@ -97,7 +100,7 @@ public class EmployeeController implements Serializable {
 	 * Todo: Issue if the user attempts to edit 2 usernames to the same different username
 	 */
 	public void updateEmployee() {
-		List<Employee> tempEmpList = service.getAllEmployees();
+		/*List<Employee> tempEmpList = service.getAllEmployees();
 		boolean isUnique = true;
 		for(Employee e : employeeList) {
 			for (int i = 0; i < tempEmpList.size(); i++) {
@@ -111,6 +114,9 @@ public class EmployeeController implements Serializable {
 				service.merge(e);
 			}
 			isUnique = true;
+		} */
+		for (Employee e : employeeList) {
+			service.merge(e);
 		}
 	}
 	
@@ -122,6 +128,7 @@ public class EmployeeController implements Serializable {
            /* context.addMessage(null, new FacesMessage("Fail",
                     "Incorrect username/password combo")); */
             System.out.println("INCORRECT USERNAME AND/OR PASSWORD!");
+            context.addMessage(null, new FacesMessage("Incorrect Username or Password."));
             return null;
         }
         System.out.println(currentEmployee.isAdmin());
@@ -130,6 +137,7 @@ public class EmployeeController implements Serializable {
     }
    
    public String goToEmployeeManagementPage() {
+	   FacesContext context = FacesContext.getCurrentInstance();
 	   if (currentEmployee == null) {
 		   System.out.println("something went wrong, current employee is null");
 		   return null;
@@ -138,6 +146,8 @@ public class EmployeeController implements Serializable {
 		   return "EmployeePageView";
 	   } else {
 		   System.out.println("NOT AN ADMIN");
+		   context.addMessage(null, new FacesMessage("You do not have sufficient permissions "
+		   		+ "to access Employee Management Page."));
 		   return null;
 	   }
    }

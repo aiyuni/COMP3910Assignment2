@@ -14,14 +14,20 @@
 	<h:form>
 		<p:outputLabel value = "List Of Current Employees" />
 		<p:dataTable value="#{employeeController.employeeList}" var="emp">
+			<p:column headerText="Employee Number">
+                <h:inputText value="#{emp.employeeId}" disabled = "true"/>
+            </p:column>
 			<p:column headerText="Employee Name">
                 <h:inputText value="#{emp.name}"/>
             </p:column>
         	<p:column headerText="Username">
-            	<h:inputText value="#{emp.userName}"/>
+            	<h:inputText value="#{emp.userName}" disabled = "true"/>
             </p:column>
             <p:column headerText="Password">
             	<h:inputText value="#{emp.password}"/>
+            </p:column>
+            <p:column headerText="Is Admin">
+            	<h:inputText value="#{emp.admin}"/>
             </p:column>
             <p:column headerText="Delete Employee">
                 <p:commandButton value = "Delete This Employee!" ajax="false" action ="#{employeeController.removeEmployee(emp)}"></p:commandButton>  
@@ -34,8 +40,10 @@
 	</h:form>
 	
 	<h:form>
-		<p:outputLabel value = "Create New Employee" />
+		<p:outputLabel value = "Create New Employee" style ="font-weight:bold; width: 100px"/>
 		<h:panelGrid columns = "2" cellpadding = "5">
+			<p:outputLabel value = "Employee Number" />
+			<p:inputText value = "#{employeeController.employee.employeeId}"></p:inputText>
 			<p:outputLabel value = "Employee Name" />
 			<p:inputText value = "#{employeeController.employee.name}"></p:inputText>
 			<p:outputLabel value = "Employee UserName" />
@@ -50,6 +58,7 @@
 		<p:commandButton value = "Add Employee!" ajax="false" action ="#{employeeController.addEmployee(employeeController.employee)}"></p:commandButton>  
 		<p:commandButton value = "Go Back to View-Only mode" ajax="false" action ="EmployeePageView"></p:commandButton>  
 		
+		<p:messages id="someId" showDetails="false" autoUpdate="true" />
 	</h:form>
 	
 </h:body>

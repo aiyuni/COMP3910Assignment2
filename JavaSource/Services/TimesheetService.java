@@ -35,7 +35,11 @@ public class TimesheetService {
     }
     
     public void merge(Timesheet ts) {
-    	em.merge(ts);
+    	try {
+    		em.merge(ts);
+    	} catch(Exception e) {
+    		System.out.println("Something went wrong in services.merge(): " + e.toString());
+    	}
     }
     
     public void removeEmployee(Timesheet thisTimesheet) {

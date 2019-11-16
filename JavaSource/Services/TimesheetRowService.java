@@ -32,8 +32,15 @@ public class TimesheetRowService {
         return em.find(TimesheetRow.class, key);
     }
     
-    public void merge(TimesheetRow timesheetRow) {
-    	em.merge(timesheetRow);
+    //testing stuff out by returning bool
+    public boolean merge(TimesheetRow timesheetRow) {
+    	if(em.contains(timesheetRow)){
+        	em.merge(timesheetRow);
+        	return true;
+    	} else {
+    		em.merge(timesheetRow);
+    		return false;
+    	}
     }
     
     public void removeTimesheetRow(TimesheetRow thisRow) {

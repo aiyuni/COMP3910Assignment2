@@ -33,7 +33,10 @@
 		</p:dataTable>
 		
 		<!--  why is redirection not working? -->
-		<p:commandButton value = "Go To Employee Page View Mode" action ="EmployeePageView"></p:commandButton>
+		<p:commandButton value = "Add Current Week Timesheet" ajax="false" action ="#{timesheetController.addNewTimesheet()}"></p:commandButton>
+		<p:commandButton value = "Go Back to Menu Page" action ="MenuPage"></p:commandButton>
+		
+		<p:messages id="someId" showDetails="false" autoUpdate="true" />
 	</h:form>
 </h:body> 
 </html>

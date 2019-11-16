@@ -27,6 +27,9 @@
 	-->
 	<h:form>
 		<p:dataTable value="#{employeeController.getAllEmployees()}" var="emp">
+		    <p:column headerText="Employee Number">
+                <h:outputText value="#{emp.employeeId}"/>
+            </p:column>
 			<p:column headerText="Employee Name">
                 <h:outputText value="#{emp.name}"/>
             </p:column>
@@ -35,6 +38,9 @@
             </p:column>
             <p:column headerText="Password">
             	<h:outputText value="#{emp.password}"/>
+            </p:column>
+            <p:column headerText="Is Admin">
+            	<h:outputText value="#{emp.admin}"/>
             </p:column>
 		</p:dataTable>
 		

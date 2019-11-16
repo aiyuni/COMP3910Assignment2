@@ -36,6 +36,12 @@ public class Timesheet implements Serializable {
     public Timesheet() {
 
     }
+    
+    public Timesheet(int empId, Date startWeek, Date endWeek) {
+    	this.employeeId = empId;
+    	this.startWeek = startWeek;
+    	this.endWeek = endWeek;
+    }
 
     /**
      * Gets the TimesheetID

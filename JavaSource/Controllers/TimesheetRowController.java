@@ -70,12 +70,18 @@ public class TimesheetRowController implements Serializable{
 	 */
 	public String updateTimesheetRow() {
 		boolean hasPlaceholder = false;
+		TimesheetRow tempTsr = null;
 		for (TimesheetRow ts : timesheetRowList) {
 			if (!(ts.getCompPrimaryKey().getProjectId()==0)) {
-				service.merge(ts);
+				if(service.merge(ts) == false) {
+					tempTsr = ts;
+				};
 			}else {
 				hasPlaceholder = true;
 			}
+		}
+		if(tempTsr != null) {
+			//timesheetRowList.remove(tempTsr);
 		}
 		if (!hasPlaceholder) {
 			timesheetRowList.add(new TimesheetRow(currentTimesheet.getTimesheetId()));  //this breaks the program somehow

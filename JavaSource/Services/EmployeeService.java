@@ -31,8 +31,8 @@ public class EmployeeService {
 
 	}
 	
-    public Employee find(int id) {
-        return em.find(Employee.class, id);
+    public Employee find(String userName) {
+        return em.find(Employee.class, userName);
     }
     
     public void merge(Employee employee) {
@@ -41,7 +41,7 @@ public class EmployeeService {
     
     public void removeEmployee(Employee thisEmployee) {
         //attach product
-       thisEmployee = find(thisEmployee.getEmployeeId());
+       thisEmployee = find(thisEmployee.getUserName());
         em.remove(thisEmployee);
     }
     
