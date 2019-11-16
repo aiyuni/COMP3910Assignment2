@@ -25,30 +25,16 @@ import Services.TimesheetService;
 @SessionScoped
 public class TimesheetController implements Serializable {
 
-	/*@Inject
-    private TimesheetController timesheetController;
-    //@Inject
-  //  private TimesheetRowController timesheetRowController;
-    @Inject
-    private EmployeeController employeeController;
-    */
-
     @EJB
     private TimesheetService service;
     
     private Employee currentEmployee;
-   // private Date startWeek = getStartWeek();
-    //private Date endWeek = getEndWeek();
-
-    //private List<TimesheetRow> details = new ArrayList<>();
 
     private Timesheet timesheet;
     private List<Timesheet> timesheetList = new ArrayList<Timesheet>();
-    private int weekNumber;
     
     Timesheet currentTimesheet;
 
-    //private List<Timesheet> history;
     
     public Timesheet getTimesheet() {
     	return timesheet;

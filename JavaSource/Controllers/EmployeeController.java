@@ -63,16 +63,12 @@ public class EmployeeController implements Serializable {
 	public String removeEmployee(Employee emp) {
 		service.removeEmployee(emp);
 		employeeList.remove(emp);
-		//employeeList = new ArrayList<Employee>();
-		//refreshList();
-		//ArrayList<Employee> empArrayList = new ArrayList (ArrayList<Employee>) employeeList;
-		//empArrayList.remove(emp.getEmployeeId());
-		//employeeList = empArrayList;
+
 		return "";
 	}
 	
 	public List<Employee> getAllEmployees(){
-		employeeList = service.getAllEmployees(); //this is important so that employeeList is not null?
+		employeeList = service.getAllEmployees(); //this is important so that employeeList is not null
 		return service.getAllEmployees();
 		
 	}
@@ -95,26 +91,9 @@ public class EmployeeController implements Serializable {
 		}
 	}
 	
-	/*Crude logic to make sure it doesn't update if the employee username matches one already existing 
-	 * in database
-	 * Todo: Issue if the user attempts to edit 2 usernames to the same different username
-	 */
+
 	public void updateEmployee() {
-		/*List<Employee> tempEmpList = service.getAllEmployees();
-		boolean isUnique = true;
-		for(Employee e : employeeList) {
-			for (int i = 0; i < tempEmpList.size(); i++) {
-				if (e.getUserName().equals(tempEmpList.get(i).getUserName())){
-					System.out.println("Equal");
-					isUnique = false;
-					continue;
-				}
-			}
-			if (isUnique) {
-				service.merge(e);
-			}
-			isUnique = true;
-		} */
+
 		for (Employee e : employeeList) {
 			service.merge(e);
 		}
