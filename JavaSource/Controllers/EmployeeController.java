@@ -104,14 +104,11 @@ public class EmployeeController implements Serializable {
 
         currentEmployee = service.login(userName, password);
         if (currentEmployee == null) {
-           /* context.addMessage(null, new FacesMessage("Fail",
-                    "Incorrect username/password combo")); */
             System.out.println("INCORRECT USERNAME AND/OR PASSWORD!");
             context.addMessage(null, new FacesMessage("Incorrect Username or Password."));
             return null;
         }
         System.out.println(currentEmployee.isAdmin());
-       // return currentEmployee.isAdmin() ? "admin" : "success";
         return "MenuPage";
     }
    
