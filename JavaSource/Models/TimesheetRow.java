@@ -61,7 +61,11 @@ public class TimesheetRow implements Serializable {
      * Default constructor
      */
     public TimesheetRow() {
-
+    	this.compPrimaryKey = new TimesheetRowKey();
+    }
+    
+    public TimesheetRow(int timesheetId) {
+    	this.compPrimaryKey = new TimesheetRowKey(timesheetId);
     }
 
     

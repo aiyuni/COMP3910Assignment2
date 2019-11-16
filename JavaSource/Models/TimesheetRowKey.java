@@ -8,13 +8,22 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class TimesheetRowKey implements Serializable {
 	@Column(name = "timesheetId", nullable = false)
-	private int timesheetId;
+	private int timesheetId = 0;
 	
 	@Column(name = "projectId", nullable = false)
-	private int projectId;
+	private int projectId = 0;
 	
 	@Column(name = "workPackage", nullable = false)
-	private String workPackage;
+	private String workPackage = "";
+	
+	public TimesheetRowKey() {
+		
+	}
+	
+	public TimesheetRowKey(int timesheetId) {
+		this.timesheetId = timesheetId;
+		this.workPackage = "New Work Package";
+	}
 	
 	public int getTimesheetId() {
 		return timesheetId;

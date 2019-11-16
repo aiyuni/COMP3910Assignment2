@@ -30,6 +30,7 @@ public class TimesheetRowController implements Serializable{
 	public List<TimesheetRow> getAllTimesheetRows(Timesheet timesheet){
 		currentTimesheet = timesheet;
 		timesheetRowList = service.getAllTimesheetRows(currentTimesheet.getTimesheetId());
+		timesheetRowList.add(new TimesheetRow(currentTimesheet.getTimesheetId()));
 		return service.getAllTimesheetRows(currentTimesheet.getTimesheetId());
 	}
 	
@@ -52,20 +53,35 @@ public class TimesheetRowController implements Serializable{
 		for (int i = 0; i < service.getAllTimesheetRows(currentTimesheet.getTimesheetId()).size(); i++) {
 			timesheetRowList.add(service.getAllTimesheetRows(currentTimesheet.getTimesheetId()).get(i));
 		}
+		timesheetRowList.add(new TimesheetRow(currentTimesheet.getTimesheetId()));
 	}
 
+	/**
+	 * Add method
+	 * @param tsRow
+	 */
 	public void addTimesheetRow(TimesheetRow tsRow) {
 		service.addTimesheetRow(tsRow);
+		timesheetRowList.add(tsRow);
 	}
 	
 	/**
 	 * Update method
 	 */
 	public String updateTimesheetRow() {
+		boolean hasPlaceholder = false;
 		for (TimesheetRow ts : timesheetRowList) {
-			service.merge(ts);
+			if (!(ts.getCompPrimaryKey().getProjectId()==0)) {
+				service.merge(ts);
+			}else {
+				hasPlaceholder = true;
+			}
 		}
-		return "CurrentTimesheetView";
+		if (!hasPlaceholder) {
+			timesheetRowList.add(new TimesheetRow(currentTimesheet.getTimesheetId()));  //this breaks the program somehow
+		}
+		//return "CurrentTimesheetView"; //after add/update, redirect to view page
+		return "";
 	}
 	
 	/**
