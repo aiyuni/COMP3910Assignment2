@@ -152,6 +152,10 @@ public class EmployeeController implements Serializable {
 	   }
    }
    
+   public String logout() {
+	   return "Login";
+   }
+   
    public Employee getCurrentEmployee() {
 	   return currentEmployee;
    }

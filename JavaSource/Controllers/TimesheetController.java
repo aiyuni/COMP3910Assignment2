@@ -39,9 +39,6 @@ public class TimesheetController implements Serializable {
    // private Date startWeek = getStartWeek();
     //private Date endWeek = getEndWeek();
 
-    private boolean toBeDeleted;
-    private boolean toBeAdded;
-
     //private List<TimesheetRow> details = new ArrayList<>();
 
     private Timesheet timesheet;
@@ -119,6 +116,23 @@ public class TimesheetController implements Serializable {
 				Date.valueOf(currentFriday));
 		service.addTimesheet(newTs);
 		timesheetList.add(newTs);
+	}
+	
+	public String goToEditTimesheet() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ZoneId zoneId = ZoneId.of("America/Vancouver");
+		LocalDate today = LocalDate.now(zoneId);
+		LocalDate currentFriday = today.with(TemporalAdjusters.next(DayOfWeek.FRIDAY));
+		LocalDate currentSaturday = currentFriday.minusDays(6);
+		System.out.println("Current Friday is: " + currentFriday);
+		
+		if (currentTimesheet.getEndWeek().toLocalDate().equals(currentFriday)) {
+			return "CurrentTimesheetEdit";
+		} else {
+			context.addMessage(null, new FacesMessage("Cannot edit a timesheet from previous weeks."));
+			return null;
+		}
+		
 	}
     
 }

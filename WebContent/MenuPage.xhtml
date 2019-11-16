@@ -20,6 +20,7 @@
 		<p:commandButton value = "View/Edit Current Timesheet" ajax="false" action ="EmployeePageView"></p:commandButton> 
 		<p:commandButton value = "View Previous Timesheets" ajax="false" action ="EmployeePageView"></p:commandButton>
 		<p:commandButton value = "Manage Employees" ajax="false" action ="#{employeeController.goToEmployeeManagementPage}"></p:commandButton> 
+		<p:commandButton value = "Log Out" ajax="false" action ="#{employeeController.logout}"></p:commandButton> 
 		
 		<br/>
 		<p:messages id="someId" showDetails="false" autoUpdate="true" />
