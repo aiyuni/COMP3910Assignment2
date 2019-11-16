@@ -11,7 +11,6 @@
 <h:body>
     <h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
     <br />
-    <h:outputText value = "Your password is #{employeeController.currentEmployee.password}" /> 
     <!--  
 	<h:form>
 		<h:dataTable value="#{employeeController.getAllEmployees()}" var="book">
@@ -47,6 +46,9 @@
 		<br/>
 		<!--  why is redirection not working? -->
 		<p:commandButton value = "Go To Edit Mode" action ="EmployeePageEdit"></p:commandButton>
+		<p:commandButton value = "Go Back to Menu Page" action ="MenuPage"></p:commandButton>
+		
 	</h:form>
+
 </h:body>
 </html>

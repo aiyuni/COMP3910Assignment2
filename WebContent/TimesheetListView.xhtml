@@ -8,11 +8,9 @@
 
 <h:head></h:head> 
 <h:body> 
-	<h:outputText value = "You are in TimesheetListView Page!" /> 
 	<br />
  	<h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
     <br />
-    <h:outputText value = "Your password is #{employeeController.currentEmployee.password}" /> 
 	<h:form>
 		<p:dataTable value="#{timesheetController.getAllTimesheets(employeeController.currentEmployee)}" var="emp">
 			<p:column headerText="Timesheet Id">

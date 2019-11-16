@@ -10,15 +10,16 @@
 
 </h:head> 
 <h:body> 
-	<h:outputText value = "You are in TimesheetRow EDIT Page!" /> 
 	<br />
- 	<h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
+ 	<h:outputLabel value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
     <br />
-    <h:outputText value = "Your password is #{employeeController.currentEmployee.password}" /> 
+    <h:outputLabel value = "Employee Number: #{employeeController.currentEmployee.employeeId}" />
     <br/>
-    <h:outputText value = "Your current timesheet is:  #{timesheetController.currentTimesheet.timesheetId}" /> 
-    <br />
-    <h:outputText value = "Your current timesheet start week is: #{timesheetController.currentTimesheet.startWeek}" /> 
+    <h:outputLabel value = "Employee Name: #{employeeController.currentEmployee.name}" />  
+    <br/>
+    <h:outputLabel value = "Your current timesheet is from: #{timesheetController.currentTimesheet.startWeek} to #{timesheetController.currentTimesheet.endWeek}" /> 
+    <br/>
+    <h:outputLabel value = "Week Number: #{timesheetController.getWeekOfYear()}" />  
 	<h:form>
 		<p:dataTable value="#{timesheetRowController.timesheetRowList}" var="emp">  <!--  this should be changed to list property for editing -->
         	<p:column headerText="Timesheet Id">
@@ -70,8 +71,6 @@
 		<p:messages id="someId" showDetails="false" autoUpdate="true" />
 		
 	</h:form>
-	
-	
 	
 </h:body> 
 </html>

@@ -9,8 +9,7 @@
 	<title>Insert title here</title>
 </h:head>
 <h:body>
-	<p>THIS IS EDIT EMPLOYEE PAGE</p>
-	
+
 	<h:form>
 		<p:outputLabel value = "List Of Current Employees" />
 		<p:dataTable value="#{employeeController.employeeList}" var="emp">
@@ -38,7 +37,7 @@
 		<p:commandButton value = "Update Employee!" action ="#{employeeController.updateEmployee()}"></p:commandButton>  
 
 	</h:form>
-	
+	<br/><br/><br/>
 	<h:form>
 		<p:outputLabel value = "Create New Employee" style ="font-weight:bold; width: 100px"/>
 		<h:panelGrid columns = "2" cellpadding = "5">
@@ -60,6 +59,5 @@
 		
 		<p:messages id="someId" showDetails="false" autoUpdate="true" />
 	</h:form>
-	
 </h:body>
 </html>

@@ -2,6 +2,7 @@ package Models;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +31,8 @@ public class Timesheet implements Serializable {
     @Column(name = "endweek")
     private Date endWeek;
 
-    /**
+
+	/**
      * Default constructor
      */
     public Timesheet() {
@@ -106,6 +108,7 @@ public class Timesheet implements Serializable {
     public void setStartWeek(Date startWeek) {
         this.startWeek = startWeek;
     }
+    
 
 
 }

@@ -8,15 +8,17 @@
 	
 <h:head></h:head> 
 <h:body> 
-	<h:outputLabel value = "You are in TimesheetRow View Page!" /> 
 	<br />
  	<h:outputLabel value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
     <br />
-    <h:outputLabel value = "Your password is #{employeeController.currentEmployee.password}" /> 
+    <h:outputLabel value = "Employee Number: #{employeeController.currentEmployee.employeeId}" />
     <br/>
-    <h:outputLabel value = "Your current timesheet is:  #{timesheetController.currentTimesheet.timesheetId}" /> 
-    <br />
-    <h:outputLabel value = "Your current timesheet start week is: #{timesheetController.currentTimesheet.startWeek}" /> 
+    <h:outputLabel value = "Employee Name: #{employeeController.currentEmployee.name}" />  
+    <br/>
+    <h:outputLabel value = "Your current timesheet is from: #{timesheetController.currentTimesheet.startWeek} to #{timesheetController.currentTimesheet.endWeek}" /> 
+    <br/>
+    <h:outputLabel value = "Week Number: #{timesheetController.getWeekOfYear()}" />  
+    
 	<h:form>
 		<p:dataTable value="#{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet)}" var="emp">  <!--  this should be changed to list property for editing -->
         	<p:column headerText="Timesheet Id">

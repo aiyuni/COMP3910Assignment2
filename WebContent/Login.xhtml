@@ -9,9 +9,9 @@
 </h:head>
 
 <h:body>
+
 	<p>Please Login First</p>
 	<h:form id="loginform">
-
 		<div>
 			<label for="username">Enter Username:</label>
 			<p:inputText binding="#{username}" id="username" />
@@ -20,7 +20,8 @@
 			<label for="password">Enter Password:</label>
 			<p:password binding="#{password}" id="password" />
 		</div>
-
+		
+		<br/>
 		<p:commandButton id="loginbutton" value="Log in"
 			action="#{employeeController.login(username.value, password.value)}">
         </p:commandButton>

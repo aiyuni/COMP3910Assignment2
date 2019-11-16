@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -134,5 +135,11 @@ public class TimesheetController implements Serializable {
 		}
 		
 	}
-    
+	
+    public String getWeekOfYear() {
+    	Calendar cal = Calendar.getInstance();
+    	cal.setTime(currentTimesheet.getEndWeek());
+    	String week = String.valueOf(cal.get(Calendar.WEEK_OF_YEAR));
+    	return week;
+    }
 }
