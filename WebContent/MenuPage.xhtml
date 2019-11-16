@@ -16,10 +16,8 @@
     <h:outputText value = "Your password is #{employeeController.currentEmployee.password}" /> 
     
     <h:form>
-    	<p:commandButton value = "View All Your Timesheets" ajax="false" action ="TimesheetListView"></p:commandButton> 
-		<p:commandButton value = "View/Edit Current Timesheet" ajax="false" action ="EmployeePageView"></p:commandButton> 
-		<p:commandButton value = "View Previous Timesheets" ajax="false" action ="EmployeePageView"></p:commandButton>
-		<p:commandButton value = "Manage Employees" ajax="false" action ="#{employeeController.goToEmployeeManagementPage}"></p:commandButton> 
+    	<p:commandButton value = "Manage/View Timesheets" ajax="false" action ="TimesheetListView"></p:commandButton> 
+		<p:commandButton value = "Manage/View Employees" ajax="false" action ="#{employeeController.goToEmployeeManagementPage}"></p:commandButton> 
 		<p:commandButton value = "Log Out" ajax="false" action ="#{employeeController.logout}"></p:commandButton> 
 		
 		<br/>
