@@ -26,34 +26,34 @@
             	<h:inputText value="#{emp.compPrimaryKey.timesheetId}" disabled = "true"/>
             </p:column>
             <p:column headerText="Project Id">
-            	<h:inputText value="#{emp.compPrimaryKey.projectId}"/>
+            	<h:inputText value="#{emp.compPrimaryKey.projectId}" converterMessage = "Only numbers are accepted for Project Id."/>
             </p:column>
             <p:column headerText="Work Package">
             	<h:inputText value="#{emp.compPrimaryKey.workPackage}"/>
             </p:column>
             <p:column headerText="Monday">
-           		<h:inputText value="#{emp.mon}"/>
+           		<h:inputText value="#{emp.mon}"  converterMessage = "Only numbers are accepted for hours worked."/>
             </p:column>
             <p:column headerText="Tuesday">
-           		<h:inputText value="#{emp.tues}"/>
+           		<h:inputText value="#{emp.tues}" converterMessage = "Only numbers are accepted for hours worked."/>
             </p:column>
             <p:column headerText="Wednesday">
-           		<h:inputText value="#{emp.wed}"/>
+           		<h:inputText value="#{emp.wed}"  converterMessage = "Only numbers are accepted for hours worked."/>
             </p:column>
             <p:column headerText="Thursday">
-           		<h:inputText value="#{emp.thurs}"/>
+           		<h:inputText value="#{emp.thurs}"  converterMessage = "Only numbers are accepted for hours worked."/>
             </p:column>
             <p:column headerText="Friday">
-           		<h:inputText value="#{emp.fri}"/>
+           		<h:inputText value="#{emp.fri}"  converterMessage = "Only numbers are accepted for hours worked."/>
             </p:column>
             <p:column headerText="Saturday">
-           		<h:inputText value="#{emp.sat}"/>
+           		<h:inputText value="#{emp.sat}"  converterMessage = "Only numbers are accepted for hours worked."/>
             </p:column>
             <p:column headerText="Sunday">
-           		<h:outputText value="#{emp.sun}"/>
+           		<h:outputText value="#{emp.sun}"  converterMessage = "Only numbers are accepted for hours worked."/>
             </p:column>
             <p:column headerText="Notes">
-           		<h:inputText value="#{emp.notes}"/>
+           		<h:inputText value="#{emp.notes}"  converterMessage = "Only numbers are accepted for hours worked."/>
             </p:column>
             <p:column headerText="Delete Row">
                 <p:commandButton value = "Delete Row" ajax="false" action ="#{timesheetRowController.deleteTimesheetRow(emp)}"></p:commandButton>  

@@ -42,7 +42,7 @@
 		<p:outputLabel value = "Create New Employee" style ="font-weight:bold; width: 100px"/>
 		<h:panelGrid columns = "2" cellpadding = "5">
 			<p:outputLabel value = "Employee Number" />
-			<p:inputText value = "#{employeeController.employee.employeeId}"></p:inputText>
+			<p:inputText value = "#{employeeController.employee.employeeId}" converterMessage = "Employee Id must be a number."></p:inputText>
 			<p:outputLabel value = "Employee Name" />
 			<p:inputText value = "#{employeeController.employee.name}"></p:inputText>
 			<p:outputLabel value = "Employee UserName" />
