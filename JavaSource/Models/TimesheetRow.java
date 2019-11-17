@@ -21,25 +21,25 @@ public class TimesheetRow implements Serializable {
 
 
     @Column(name = "monday")
-    private Integer mon = 0;
+    private Double mon = 0.0;
 
     @Column(name = "tuesday")
-    private Integer tues = 0;
+    private Double tues = 0.0;
 
     @Column(name = "wednesday")
-    private Integer wed = 0;
+    private Double wed = 0.0;
 
     @Column(name = "thursday")
-    private Integer thurs = 0;
+    private Double thurs = 0.0;
 
     @Column(name = "friday")
-    private Integer fri = 0;
+    private Double fri = 0.0;
 
     @Column(name = "saturday")
-    private Integer sat = 0;
+    private Double sat = 0.0;
 
     @Column(name = "sunday")
-    private Integer sun = 0;
+    private Double sun = 0.0;
 
     @Column(name = "notes")
     private String notes = "";
@@ -69,61 +69,61 @@ public class TimesheetRow implements Serializable {
 		this.compPrimaryKey = compPrimaryKey;
 	}
 
-    public Integer getMon() {
+    public Double getMon() {
         return mon;
     }
 
     
-    public void setMon(Integer monday) {
+    public void setMon(Double monday) {
         this.mon = monday;
     }
 
-    public Integer getTues() {
+    public Double getTues() {
         return tues;
     }
 
 
-    public void setTues(Integer tuesday) {
+    public void setTues(Double tuesday) {
         this.tues = tuesday;
     }
 
-    public Integer getWed() {
+    public Double getWed() {
         return wed;
     }
 
-    public void setWed(Integer wednesday) {
+    public void setWed(Double wednesday) {
         this.wed = wednesday;
     }
 
-    public Integer getThurs() {
+    public Double getThurs() {
         return thurs;
     }
 
-    public void setThurs(Integer thursday) {
+    public void setThurs(Double thursday) {
         this.thurs = thursday;
     }
 
-    public Integer getFri() {
+    public Double getFri() {
         return fri;
     }
 
-    public void setFri(Integer friday) {
+    public void setFri(Double friday) {
         this.fri = friday;
     }
 
-    public Integer getSat() {
+    public Double getSat() {
         return sat;
     }
 
-    public void setSat(Integer saturday) {
+    public void setSat(Double saturday) {
         this.sat = saturday;
     }
 
-    public Integer getSun() {
+    public Double getSun() {
         return sun;
     }
 
-    public void setSun(Integer sunday) {
+    public void setSun(Double sunday) {
         this.sun = sunday;
     }
 

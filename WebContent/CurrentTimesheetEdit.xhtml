@@ -32,28 +32,42 @@
             	<h:inputText value="#{emp.compPrimaryKey.workPackage}"/>
             </p:column>
             <p:column headerText="Monday">
-           		<h:inputText value="#{emp.mon}"  converterMessage = "Only numbers are accepted for hours worked."/>
+           		<h:inputText value="#{emp.mon}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Monday must be between 0 and 24">
+           		<f:validateLongRange minimum="0" maximum="24"/>
+           		</h:inputText>
             </p:column>
             <p:column headerText="Tuesday">
-           		<h:inputText value="#{emp.tues}" converterMessage = "Only numbers are accepted for hours worked."/>
+           		<h:inputText value="#{emp.tues}" converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Tuesday must be between 0 and 24">
+           		<f:validateLongRange minimum="0" maximum="24"/>
+           		</h:inputText>
             </p:column>
             <p:column headerText="Wednesday">
-           		<h:inputText value="#{emp.wed}"  converterMessage = "Only numbers are accepted for hours worked."/>
+           		<h:inputText value="#{emp.wed}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Wednesday must be between 0 and 24">
+           		<f:validateLongRange minimum="0" maximum="24"/>
+           		</h:inputText>
             </p:column>
             <p:column headerText="Thursday">
-           		<h:inputText value="#{emp.thurs}"  converterMessage = "Only numbers are accepted for hours worked."/>
+           		<h:inputText value="#{emp.thurs}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Thursday must be between 0 and 24">
+           		<f:validateLongRange minimum="0" maximum="24"/>
+           		</h:inputText>
             </p:column>
             <p:column headerText="Friday">
-           		<h:inputText value="#{emp.fri}"  converterMessage = "Only numbers are accepted for hours worked."/>
+           		<h:inputText value="#{emp.fri}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Friday must be between 0 and 24">
+           		<f:validateLongRange minimum="0" maximum="24"/>
+           		</h:inputText>
             </p:column>
             <p:column headerText="Saturday">
-           		<h:inputText value="#{emp.sat}"  converterMessage = "Only numbers are accepted for hours worked."/>
+           		<h:inputText value="#{emp.sat}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Saturday must be between 0 and 24">
+           		<f:validateLongRange minimum="0" maximum="24"/>
+           		</h:inputText>
             </p:column>
             <p:column headerText="Sunday">
-           		<h:outputText value="#{emp.sun}"  converterMessage = "Only numbers are accepted for hours worked."/>
+           		<h:inputText value="#{emp.sun}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Sunday must be between 0 and 24">
+           		<f:validateLongRange minimum="0" maximum="24"/>
+           		</h:inputText>
             </p:column>
             <p:column headerText="Notes">
-           		<h:inputText value="#{emp.notes}"  converterMessage = "Only numbers are accepted for hours worked."/>
+           		<h:inputText value="#{emp.notes}" />
             </p:column>
             <p:column headerText="Delete Row">
                 <p:commandButton value = "Delete Row" ajax="false" action ="#{timesheetRowController.deleteTimesheetRow(emp)}"></p:commandButton>  
