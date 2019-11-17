@@ -20,6 +20,10 @@ public class EmployeeService {
 	@PersistenceContext(name = "EmployeeApp")
 	private EntityManager em;
 
+	/**
+	 * Method to add an given employee
+	 * @param emp the employee to add 
+	 */
 	public void addEmployee(Employee emp) {
 		if(em.contains(emp)) {
 			System.out.println("merging inside addEmployee");
@@ -31,14 +35,27 @@ public class EmployeeService {
 
 	}
 	
+	/**
+	 * Method to find an Employee based on Employee username
+	 * @param userName the employee username to search for
+	 * @return the Employee
+	 */
     public Employee find(String userName) {
         return em.find(Employee.class, userName);
     }
     
+    /**
+     * Method to update an Employee
+     * @param employee the Employee to update
+     */
     public void merge(Employee employee) {
     	em.merge(employee);
     }
     
+    /**
+     * Method to remove an Employee
+     * @param thisEmployee the Employee to remove
+     */
     public void removeEmployee(Employee thisEmployee) {
         //attach product
        thisEmployee = find(thisEmployee.getUserName());
@@ -47,7 +64,7 @@ public class EmployeeService {
     
     /**
      * Gets a list of all the employees in the Employee table
-     * @return
+     * @return the list of Employees
      */
     public List<Employee> getAllEmployees(){
     	
@@ -72,6 +89,12 @@ public class EmployeeService {
     
     }
     
+    /**
+     * Method to handle Employee logins
+     * @param userName the Employee userName
+     * @param password the Employee password
+     * @return the Employee based on the userName and password, or null if the Employee cannot be found in database
+     */
     public Employee login(String userName, String password) {
     	//doesn't seem to work with TypedQuery? 
     	Query query;

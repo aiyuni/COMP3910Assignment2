@@ -27,6 +27,11 @@ public class TimesheetRowController implements Serializable{
 	private Timesheet currentTimesheet;
 
 	//We use this method.
+	/**
+	 * Gets all timesheet rows for a specific timesheet
+	 * @param timesheet the specific timesheet 
+	 * @return a list of all the timesheet rows belonging to that specific timesheet
+	 */
 	public List<TimesheetRow> getAllTimesheetRows(Timesheet timesheet){
 		currentTimesheet = timesheet;
 		timesheetRowList = service.getAllTimesheetRows(currentTimesheet.getTimesheetId());
@@ -34,20 +39,25 @@ public class TimesheetRowController implements Serializable{
 		return service.getAllTimesheetRows(currentTimesheet.getTimesheetId());
 	}
 	
-	//Gets all the timesheetrows in database
+	//Not used
+	/**
+	 * Gets all the timesheet rows in database.
+	 * @return list of all timesheet rows in the database. 
+	 */
 	public List<TimesheetRow> getAllTimesheetRows(){
 		return service.getAllTimesheetRows();
 	}
 	
-	/*overloaded method to get timesheetrows for the specific timesheetId. We cannot use this since we need to 
-	 * dependency inject a timesheet object!
+	//Not used since we want a Timesheet object to be DIed to this class, and not just a Timesheet Id
+	/**
+	 * overloaded method to get timesheetrows for the specific timesheetId. 
 	 */
 	public List<TimesheetRow> getAllTimesheetRows(int timesheetId){
 		return service.getAllTimesheetRows(timesheetId);
 	}
 	
 	/**
-	 * Populates the timesheetRowList (called if the list is null)
+	 * Method to populate the timesheetRowList with the newest data in the database
 	 */
 	private void refreshList() {
 		for (int i = 0; i < service.getAllTimesheetRows(currentTimesheet.getTimesheetId()).size(); i++) {
@@ -57,8 +67,8 @@ public class TimesheetRowController implements Serializable{
 	}
 
 	/**
-	 * Add method
-	 * @param tsRow
+	 * Method to add a timesheet row
+	 * @param tsRow the timesheetrow to add
 	 */
 	public void addTimesheetRow(TimesheetRow tsRow) {
 		service.addTimesheetRow(tsRow);
@@ -66,7 +76,7 @@ public class TimesheetRowController implements Serializable{
 	}
 	
 	/**
-	 * Update method
+	 * Method to update timesheet rows
 	 */
 	public String updateTimesheetRow() {
 		boolean hasPlaceholder = false;
@@ -91,8 +101,8 @@ public class TimesheetRowController implements Serializable{
 	}
 	
 	/**
-	 * Delete method
-	 * @param thisRow
+	 * Method to delete a timesheet row
+	 * @param thisRow the timesheet row to delete
 	 * @return
 	 */
 	public String deleteTimesheetRow(TimesheetRow thisRow) {
@@ -101,11 +111,26 @@ public class TimesheetRowController implements Serializable{
 		return "";
 	}
 	
+	/**
+	 * Method to calculate and return the total hours worked for a timesheet row
+	 * @param mon hours worked on monday
+	 * @param tues hours worked on tuesday
+	 * @param wed  hours worked on wednesday
+	 * @param thurs hours worked on Thursday
+	 * @param fri hours worked on Friday
+	 * @param sat hours worked on Saturday
+	 * @param sun hours worked on Sunday
+	 * @return the total hours worked in the timesheet row 
+	 */
 	public double getTotalHoursWorkedOnTimesheetRow(double mon, double tues, double wed, double thurs, double fri, 
 			double sat, double sun) {
 		return mon + tues + wed + thurs + fri + sat + sun;
 	}
 	
+	/**
+	 * Method to calculate and return the total hours worked in the timesheet
+	 * @return the total hours worked in the timesheet
+	 */
 	public double getTotalHoursWorkedOnTimesheet() {
 		double overallTotal = 0;
 		for (TimesheetRow ts : timesheetRowList) {
@@ -114,6 +139,11 @@ public class TimesheetRowController implements Serializable{
 		return overallTotal;
 	}
 	
+	/**
+	 * Method to calculate and return the total number of hours worked in a given day of the week
+	 * @param dayOfWeek the day of week
+	 * @return the total number of hours worked in a given day of the week
+	 */
 	public double getTotalHoursOnDay(int dayOfWeek) {
 		double total = 0;
 		for (TimesheetRow ts : timesheetRowList) {
@@ -147,25 +177,33 @@ public class TimesheetRowController implements Serializable{
 	}
 	
 	
-	//Getters and Setters
+	/**
+	 * Getter for timesheetRow
+	 * @return the timesheetRow
+	 */
 	public TimesheetRow getTimesheetRow() {
 		if (timesheetRow == null) {
 			timesheetRow = new TimesheetRow();
 			timesheetRow.setCompPrimaryKey(new TimesheetRowKey());
 		}
-	/*	if (timesheetRow.getTimesheetId() == 0) {
-			timesheetRow.setTimesheetId(currentTimesheet.getTimesheetId());
-		} */
 		if (timesheetRow.getCompPrimaryKey().getTimesheetId() == 0) {
 			timesheetRow.getCompPrimaryKey().setTimesheetId(currentTimesheet.getTimesheetId());
 		} 
 		return timesheetRow;
 	}
 	
+	/**
+	 * Setter for timesheetRow
+	 * @param timesheetRow the timesheetRow to set
+	 */
 	public void setTimesheetRow(TimesheetRow timesheetRow) {
 		this.timesheetRow = timesheetRow;
 	}
 	
+	/**
+	 * Getter for the timesheetRow list
+	 * @return the timesheetRow list
+	 */
 	public List<TimesheetRow> getTimesheetRowList(){
 		if (timesheetRowList == null) {
 			refreshList();
@@ -173,14 +211,26 @@ public class TimesheetRowController implements Serializable{
 		return timesheetRowList;
 	}
 	
+	/**
+	 * Setter for the timesheetRow list
+	 * @param timesheetrowlist the timesheetRow list to set
+	 */
 	public void setTimesheetRowList(List<TimesheetRow> timesheetrowlist) {
 		this.timesheetRowList = timesheetrowlist;
 	}
 	
+	/**
+	 * Getter for the current timesheet
+	 * @return the current timesheet
+	 */
 	public Timesheet getCurrentTimesheet() {
 		return currentTimesheet;
 	}
 
+	/**
+	 * Setter for the current timesheet
+	 * @param currentTimesheet the current timesheet to set
+	 */
 	public void setCurrentTimesheet(Timesheet currentTimesheet) {
 		this.currentTimesheet = currentTimesheet;
 	}

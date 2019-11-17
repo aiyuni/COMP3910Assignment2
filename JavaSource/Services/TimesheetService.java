@@ -19,6 +19,10 @@ public class TimesheetService {
 	@PersistenceContext(name = "TimesheetApp")
 	private EntityManager em;
 
+	/**
+	 * Method to add a timesheet to the database
+	 * @param ts the timesheet to add
+	 */
 	public void addTimesheet(Timesheet ts) {
 		if(em.contains(ts)) {
 			System.out.println("merging inside addTimesheet");
@@ -30,10 +34,19 @@ public class TimesheetService {
 
 	}
 	
+	/**
+	 * Method to find a timesheet in the database based on its id
+	 * @param id the Timesheet Id
+	 * @return the timesheet that is found
+	 */
     public Timesheet find(int id) {
         return em.find(Timesheet.class, id);
     }
     
+    /**
+     * Method to update a timesheet in the database
+     * @param ts the timesheet to update
+     */
     public void merge(Timesheet ts) {
     	try {
     		em.merge(ts);
@@ -42,6 +55,10 @@ public class TimesheetService {
     	}
     }
     
+    /**
+     * Method to remove a timesheet in the database
+     * @param thisTimesheet the timesheet to delete
+     */
     public void removeEmployee(Timesheet thisTimesheet) {
         //attach product
        thisTimesheet = find(thisTimesheet.getEmployeeId());
@@ -49,8 +66,9 @@ public class TimesheetService {
     }
     
     /**
-     * Gets a list of all the employees in the Employee table belong to the user
-     * @return
+     * Gets a list of all the timesheets in the database belong to the employeeId
+     * @param employeeId the employeeId to find timesheets for
+     * @return the list of all timesheets for that employeeId
      */
     public List<Timesheet> getAllTimesheets(int employeeId){
     	
@@ -79,10 +97,10 @@ public class TimesheetService {
     /**
      * Gets the current Timesheet represented by the employee Id, startWeek, and endWeek. 
      * Try to use timesheetId as the only paramater?
-     * @param employeeId
-     * @param startWeek
-     * @param endWeek
-     * @return
+     * @param employeeId the employeeId
+     * @param startWeek the start week
+     * @param endWeek the end week
+     * @return a list of all Timesheets belonging to the params being searched
      */
     public Timesheet getCurrentTimesheet(int employeeId, Date startWeek, Date endWeek) {
     	 Query query = em.createNativeQuery(
