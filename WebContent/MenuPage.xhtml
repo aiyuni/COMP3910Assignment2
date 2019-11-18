@@ -6,17 +6,18 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+<title>#{msgs.mainmenutitle}</title>
 </h:head>
 
 <h:body>
-		<p:outputLabel value = "You are logged in as: #{employeeController.currentEmployee.userName}"></p:outputLabel> 
+		<p:outputLabel value = "#{msgs.loggedinas} #{employeeController.currentEmployee.userName}"></p:outputLabel> 
 	    <br />
 	  <!--   <p:outputText value = "Your password is #{employeeController.currentEmployee.password}" />  -->
 	    
 	    <h:form>
-	    	<p:commandButton value = "Manage/View Timesheets" ajax="false" action ="TimesheetListView"></p:commandButton> 
-			<p:commandButton value = "Manage/View Employees" ajax="false" action ="#{employeeController.goToEmployeeManagementPage}"></p:commandButton> 
-			<p:commandButton value = "Log Out" ajax="false" action ="#{employeeController.logout}"></p:commandButton> 
+	    	<p:commandButton value = "#{msgs.manageviewTS}" ajax="false" action ="TimesheetListView"></p:commandButton> 
+			<p:commandButton value = "#{msgs.manageviewE}" ajax="false" action ="#{employeeController.goToEmployeeManagementPage}"></p:commandButton> 
+			<p:commandButton value = "#{msgs.logoutbutton}" ajax="false" action ="#{employeeController.logout}"></p:commandButton> 
 			
 			<br/>
 			<p:messages id="someId" showDetails="false" autoUpdate="true" />

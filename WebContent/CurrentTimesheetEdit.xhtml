@@ -11,75 +11,75 @@
 </h:head> 
 <h:body> 
 	<br />
- 	<h:outputLabel value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
+ 	<h:outputLabel value = "#{msgs.loggedinas} #{employeeController.currentEmployee.userName}" /> 
     <br />
-    <h:outputLabel value = "Employee Number: #{employeeController.currentEmployee.employeeId}" />
+    <h:outputLabel value = "#{msgs.employeenumber}: #{employeeController.currentEmployee.employeeId}" />
     <br/>
-    <h:outputLabel value = "Employee Name: #{employeeController.currentEmployee.name}" />  
+    <h:outputLabel value = "#{msgs.employeename}: #{employeeController.currentEmployee.name}" />  
     <br/>
-    <h:outputLabel value = "Your current timesheet is from: #{timesheetController.currentTimesheet.startWeek} to #{timesheetController.currentTimesheet.endWeek}" /> 
+    <h:outputLabel value = "#{msgs.yourcurrenttimesheetisfrom} #{timesheetController.currentTimesheet.startWeek} to #{timesheetController.currentTimesheet.endWeek}" /> 
     <br/>
-    <h:outputLabel value = "Week Number: #{timesheetController.getWeekOfYear()}" />  
+    <h:outputLabel value = "#{msgs.weeknumber}: #{timesheetController.getWeekOfYear()}" />  
 	<h:form>
 		<p:dataTable value="#{timesheetRowController.timesheetRowList}" var="emp">  <!--  this should be changed to list property for editing -->
-        	<p:column headerText="Timesheet Id">
+        	<p:column headerText="#{msgs.timesheetID}">
             	<h:inputText value="#{emp.compPrimaryKey.timesheetId}" disabled = "true"/>
             </p:column>
-            <p:column headerText="Project Id">
+            <p:column headerText="#{msgs.projectID}">
             	<h:inputText value="#{emp.compPrimaryKey.projectId}" converterMessage = "Only numbers are accepted for Project Id."/>
             </p:column>
-            <p:column headerText="Work Package">
+            <p:column headerText="#{msgs.workpackage}">
             	<h:inputText value="#{emp.compPrimaryKey.workPackage}"/>
             </p:column>
-            <p:column headerText="Monday">
+            <p:column headerText="#{msgs.monday}">
            		<h:inputText value="#{emp.mon}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Monday must be between 0 and 24">
            		<f:validateLongRange minimum="0" maximum="24"/>
            		</h:inputText>
             </p:column>
-            <p:column headerText="Tuesday">
+            <p:column headerText="#{msgs.tuesday}">
            		<h:inputText value="#{emp.tues}" converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Tuesday must be between 0 and 24">
            		<f:validateLongRange minimum="0" maximum="24"/>
            		</h:inputText>
             </p:column>
-            <p:column headerText="Wednesday">
+            <p:column headerText="#{msgs.wednesday}">
            		<h:inputText value="#{emp.wed}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Wednesday must be between 0 and 24">
            		<f:validateLongRange minimum="0" maximum="24"/>
            		</h:inputText>
             </p:column>
-            <p:column headerText="Thursday">
+            <p:column headerText="#{msgs.thursday}">
            		<h:inputText value="#{emp.thurs}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Thursday must be between 0 and 24">
            		<f:validateLongRange minimum="0" maximum="24"/>
            		</h:inputText>
             </p:column>
-            <p:column headerText="Friday">
+            <p:column headerText="#{msgs.friday}">
            		<h:inputText value="#{emp.fri}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Friday must be between 0 and 24">
            		<f:validateLongRange minimum="0" maximum="24"/>
            		</h:inputText>
             </p:column>
-            <p:column headerText="Saturday">
+            <p:column headerText="#{msgs.saturday}">
            		<h:inputText value="#{emp.sat}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Saturday must be between 0 and 24">
            		<f:validateLongRange minimum="0" maximum="24"/>
            		</h:inputText>
             </p:column>
-            <p:column headerText="Sunday">
+            <p:column headerText="#{msgs.sunday}">
            		<h:inputText value="#{emp.sun}"  converterMessage = "Only numbers are accepted for hours worked." validatorMessage = "Hours worked for Sunday must be between 0 and 24">
            		<f:validateLongRange minimum="0" maximum="24"/>
            		</h:inputText>
             </p:column>
-            <p:column headerText="Notes">
+            <p:column headerText="#{msgs.notes}">
            		<h:inputText value="#{emp.notes}" />
             </p:column>
-            <p:column headerText="Delete Row">
-                <p:commandButton value = "Delete Row" ajax="false" action ="#{timesheetRowController.deleteTimesheetRow(emp)}"></p:commandButton>  
+            <p:column headerText="#{msgs.deleterow}">
+                <p:commandButton value = "#{msgs.deleterow}" ajax="false" action ="#{timesheetRowController.deleteTimesheetRow(emp)}"></p:commandButton>  
             </p:column>
 		</p:dataTable>
 		
 		<br/>
 		<!--  why is redirection not working? -->
-		<p:commandButton value = "Save Timesheet" ajax="false" action ="#{timesheetRowController.updateTimesheetRow()}"></p:commandButton>
+		<p:commandButton value = "#{msgs.savetimesheet}" ajax="false" action ="#{timesheetRowController.updateTimesheetRow()}"></p:commandButton>
 	
 		<br/>
-		<p:commandButton value = "Go Back to View-Only mode" ajax="false" action ="CurrentTimesheetView"></p:commandButton>  
+		<p:commandButton value = "#{msgs.backtoviewonly}" ajax="false" action ="CurrentTimesheetView"></p:commandButton>  
 		
 		<br/>
 		<p:messages id="someId" showDetails="false" autoUpdate="true" />

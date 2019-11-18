@@ -9,73 +9,73 @@
 <h:head></h:head> 
 <h:body> 
 	<br />
- 	<h:outputLabel value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
+ 	<h:outputLabel value = "#{msgs.loggedinas} #{employeeController.currentEmployee.userName}" /> 
     <br />
-    <h:outputLabel value = "Employee Number: #{employeeController.currentEmployee.employeeId}" />
+    <h:outputLabel value = "#{msgs.employeenumber}: #{employeeController.currentEmployee.employeeId}" />
     <br/>
-    <h:outputLabel value = "Employee Name: #{employeeController.currentEmployee.name}" />  
+    <h:outputLabel value = "#{msgs.employeename}: #{employeeController.currentEmployee.name}" />  
     <br/>
-    <h:outputLabel value = "Your current timesheet is from: #{timesheetController.currentTimesheet.startWeek} to #{timesheetController.currentTimesheet.endWeek}" /> 
+    <h:outputLabel value = "#{msgs.yourcurrenttimesheetisfrom} #{timesheetController.currentTimesheet.startWeek} to #{timesheetController.currentTimesheet.endWeek}" /> 
     <br/>
-    <h:outputLabel value = "Week Number: #{timesheetController.getWeekOfYear()}" />  
+    <h:outputLabel value = "#{msgs.weeknumber}: #{timesheetController.getWeekOfYear()}" />  
     
 	<h:form>
 		<p:dataTable value="#{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet)}" var="emp">  <!--  this should be changed to list property for editing -->
-        	<p:column headerText="Timesheet Id">
+        	<p:column headerText="#{msgs.timesheetID}">
             	<h:outputLabel value="#{emp.compPrimaryKey.timesheetId}"/>
             </p:column>
-            <p:column headerText="Project Id">
+            <p:column headerText="#{msgs.projectID}">
             	<h:outputLabel value="#{emp.compPrimaryKey.projectId}"/>
             </p:column>
-            <p:column headerText="Work Package">
+            <p:column headerText="#{msgs.workpackage}">
             	<h:outputLabel value="#{emp.compPrimaryKey.workPackage}"/>
             </p:column>
-            <p:column headerText="Monday">
+            <p:column headerText="#{msgs.monday}">
            		<h:outputLabel value="#{emp.mon}"/>
            		<f:facet name="footer">
         			Sum: #{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet).stream().map(emp->emp.mon).sum()}
     			</f:facet>
             </p:column>
-            <p:column headerText="Tuesday">
+            <p:column headerText="#{msgs.tuesday}">
            		<h:outputLabel value="#{emp.tues}"/>
            		<f:facet name="footer">
         			Sum: #{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet).stream().map(emp->emp.tues).sum()}
     			</f:facet>
             </p:column>
-            <p:column headerText="Wednesday">
+            <p:column headerText="#{msgs.wednesday}">
            		<h:outputLabel value="#{emp.wed}"/>
            		<f:facet name="footer">
         			Sum: #{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet).stream().map(emp->emp.wed).sum()}
     			</f:facet>
             </p:column>
-            <p:column headerText="Thursday">
+            <p:column headerText="#{msgs.thursday}">
            		<h:outputLabel value="#{emp.thurs}"/>
            		<f:facet name="footer">
         			Sum: #{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet).stream().map(emp->emp.thurs).sum()}
     			</f:facet>
             </p:column>
-            <p:column headerText="Friday">
+            <p:column headerText="#{msgs.friday}">
            		<h:outputLabel value="#{emp.fri}"/>
            		<f:facet name="footer">
         			Sum: #{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet).stream().map(emp->emp.fri).sum()}
     			</f:facet>
             </p:column>
-            <p:column headerText="Saturday">
+            <p:column headerText="#{msgs.saturday}">
            		<h:outputLabel value="#{emp.sat}"/>
            		<f:facet name="footer">
         			Sum: #{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet).stream().map(emp->emp.sat).sum()}
     			</f:facet>
             </p:column>
-            <p:column headerText="Sunday">
+            <p:column headerText="#{msgs.sunday}">
            		<h:outputLabel value="#{emp.sun}"/>
            		<f:facet name="footer">
         			Sum: #{timesheetRowController.getAllTimesheetRows(timesheetController.currentTimesheet).stream().map(emp->emp.sun).sum()}
     			</f:facet>
             </p:column>
-            <p:column headerText="Totals">
+            <p:column headerText="#{msgs.totals}">
            		<h:outputLabel value="#{timesheetRowController.getTotalHoursWorkedOnTimesheetRow(emp.mon, emp.tues, emp.wed, emp.thurs, emp.fri, emp.sat, emp.sun)}"/>
             </p:column>
-            <p:column headerText="Notes">
+            <p:column headerText="#{msgs.notes}">
            		<h:outputLabel value="#{emp.notes}"/>
             </p:column>
 		</p:dataTable>
@@ -103,8 +103,8 @@
 		-->
 		<!--  why is redirection not working? -->
 		<br/>
-		<p:commandButton value = "Edit/Add to Timesheet" ajax = "false" action ="#{timesheetController.goToEditTimesheet}"></p:commandButton>
-		<p:commandButton value = "Go back to list of Timesheets"  action ="TimesheetListView"></p:commandButton>
+		<p:commandButton value = "#{msgs.editaddtimesheet}" ajax = "false" action ="#{timesheetController.goToEditTimesheet}"></p:commandButton>
+		<p:commandButton value = "#{msgs.backtotimesheets}"  action ="TimesheetListView"></p:commandButton>
 		
 		<br/>
 		<p:messages id="someId" showDetails="false" autoUpdate="true" />

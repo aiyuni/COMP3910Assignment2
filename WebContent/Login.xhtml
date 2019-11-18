@@ -6,23 +6,24 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+<title>#{msgs.loginbutton}</title>
 </h:head>
 
 <h:body>
 
-	<p>Please Login First</p>
+	<p>#{msgs.loginprompt}</p>
 	<h:form id="loginform">
 		<div>
-			<label for="username">Enter Username:</label>
+			<label for="username">#{msgs.usernameprompt}</label>
 			<p:inputText binding="#{username}" id="username" />
 		</div>
 		<div>
-			<label for="password">Enter Password:</label>
+			<label for="password">#{msgs.passwordprompt}</label>
 			<p:password binding="#{password}" id="password" />
 		</div>
 		
 		<br/>
-		<p:commandButton id="loginbutton" value="Log in"
+		<p:commandButton id="loginbutton" value="#{msgs.loginbutton}"
 			action="#{employeeController.login(username.value, password.value)}">
         </p:commandButton>
         

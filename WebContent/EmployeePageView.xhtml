@@ -6,10 +6,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 <h:head>
-	<title>Employee List</title>
+	<title>#{msgs.employeelist}</title>
 </h:head>
 <h:body>
-    <h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
+    <h:outputText value = "#{msgs.loggedinas} #{employeeController.currentEmployee.userName}" /> 
     <br />
     <!--  
 	<h:form>
@@ -26,27 +26,27 @@
 	-->
 	<h:form>
 		<p:dataTable value="#{employeeController.getAllEmployees()}" var="emp">
-		    <p:column headerText="Employee Number">
+		    <p:column headerText="#{msgs.employeenumber}">
                 <h:outputText value="#{emp.employeeId}"/>
             </p:column>
-			<p:column headerText="Employee Name">
+			<p:column headerText="#{msgs.employeename}">
                 <h:outputText value="#{emp.name}"/>
             </p:column>
-        	<p:column headerText="Username">
+        	<p:column headerText="#{msgs.username}">
             	<h:outputText value="#{emp.userName}"/>
             </p:column>
-            <p:column headerText="Password">
+            <p:column headerText="#{msgs.password}">
             	<h:outputText value="#{emp.password}"/>
             </p:column>
-            <p:column headerText="Is Admin">
+            <p:column headerText="#{msgs.isadmin}">
             	<h:outputText value="#{emp.admin}"/>
             </p:column>
 		</p:dataTable>
 		
 		<br/>
 		<!--  why is redirection not working? -->
-		<p:commandButton value = "Go To Edit Mode" action ="EmployeePageEdit"></p:commandButton>
-		<p:commandButton value = "Go Back to Menu Page" action ="MenuPage"></p:commandButton>
+		<p:commandButton value = "#{msgs.gotoeditmode}" action ="EmployeePageEdit"></p:commandButton>
+		<p:commandButton value = "#{msgs.backtomenu}" action ="MenuPage"></p:commandButton>
 		
 	</h:form>
 

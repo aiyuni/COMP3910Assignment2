@@ -9,31 +9,31 @@
 <h:head></h:head> 
 <h:body> 
 	<br />
- 	<h:outputText value = "You are logged in as #{employeeController.currentEmployee.userName}" /> 
+ 	<h:outputText value = "#{msgs.loggedinas} #{employeeController.currentEmployee.userName}" /> 
     <br />
 	<h:form>
 		<p:dataTable value="#{timesheetController.getAllTimesheets(employeeController.currentEmployee)}" var="emp">
-			<p:column headerText="Timesheet Id">
+			<p:column headerText="#{msgs.timesheetID}">
                 <h:outputText value="#{emp.timesheetId}"/>
             </p:column>
-        	<p:column headerText="Employee Id">
+        	<p:column headerText="#{msgs.employeenumber}">
             	<h:outputText value="#{emp.employeeId}"/>
             </p:column>
-            <p:column headerText="Start Week">
+            <p:column headerText="#{msgs.startweek}">
             	<h:outputText value="#{emp.startWeek}"/>
             </p:column>
-            <p:column headerText="End Week">
+            <p:column headerText="#{msgs.endweek}">
            		<h:outputText value="#{emp.endWeek}"/>
             </p:column>
-            <p:column headerText="Go To This Timesheet">
-                <p:commandButton value = "View This Timesheet" ajax="false" action ="#{timesheetController.goToTimesheet(emp.employeeId, emp.startWeek, emp.endWeek)}"></p:commandButton>  
+            <p:column headerText="#{msgs.gotothisweek}">
+                <p:commandButton value = "#{msgs.viewthistimesheet}" ajax="false" action ="#{timesheetController.goToTimesheet(emp.employeeId, emp.startWeek, emp.endWeek)}"></p:commandButton>  
             </p:column>
 		</p:dataTable>
 		
 		<br/>
 		<!--  why is redirection not working? -->
-		<p:commandButton value = "Add Current Week Timesheet" ajax="false" action ="#{timesheetController.addNewTimesheet()}"></p:commandButton>
-		<p:commandButton value = "Go Back to Menu Page" action ="MenuPage"></p:commandButton>
+		<p:commandButton value = "#{msgs.addcurrentweektimesheet}" ajax="false" action ="#{timesheetController.addNewTimesheet()}"></p:commandButton>
+		<p:commandButton value = "#{msgs.backtomenu}" action ="MenuPage"></p:commandButton>
 		
 		<p:messages id="someId" showDetails="false" autoUpdate="true" />
 	</h:form>
